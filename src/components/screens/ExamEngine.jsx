@@ -224,19 +224,30 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                 const isSelected = answers[currentQ.id] === option.id;
                 const optText = isHi && option.textHi ? option.textHi : option.text;
                 return (
-                  <label
+                  <div
                     key={option.id}
                     onClick={() => handleSelectOption(option.id)}
                     className={`flex items-center gap-4 p-4 rounded-2xl border cursor-pointer transition-all ${
                       isSelected
-                        ? 'border-[#7F58FA] bg-[#F3EFFF]/50 shadow-sm ring-1 ring-[#7F58FA]'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50/70'
+                        ? 'border-[#2dc38c] bg-[#e9fbf3]/60 shadow-sm ring-2 ring-[#2dc38c]/20'
+                        : 'border-gray-200 hover:border-[#beddd0] hover:bg-gray-50/70'
                     }`}
                   >
+                    {/* Custom Uiverse.io animated checkbox by elijahgummer */}
+                    <div className="uiverse-checkbox-container pointer-events-none">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        readOnly
+                        aria-label={`Option ${option.id}`}
+                      />
+                      <div className="checkmark"></div>
+                    </div>
+
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all shrink-0 ${
                         isSelected
-                          ? 'bg-[#7F58FA] text-white shadow-sm'
+                          ? 'bg-[#2dc38c] text-white shadow-sm'
                           : 'border-2 border-gray-300 text-gray-600'
                       }`}
                     >
@@ -245,7 +256,7 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                     <span className="text-sm sm:text-base text-gray-800 font-medium">
                       {optText}
                     </span>
-                  </label>
+                  </div>
                 );
               })}
             </div>
