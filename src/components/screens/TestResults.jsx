@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { StudentSidebar } from '../common/Sidebar';
-import { DownloadIcon } from '../common/Icons';
-import { defaultQuestions } from '../../data/mockData';
+import { DownloadIcon, ChevronRight, CheckIcon, CloseIcon } from '../common/Icons';
+import { mockTests } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
 export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang = 'en' }) => {
@@ -82,28 +81,34 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
   });
 
   return (
-    <div className="min-h-screen bg-[#FDFAFF] flex">
-      <StudentSidebar activeTab="Performance" onNavigate={onNavigate} />
-
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <header className="h-16 bg-white border-b border-[#E5E7EB] px-6 flex items-center justify-between sticky top-[41px] z-30">
+    <div className="min-h-screen bg-[#FDFAFF] text-[#1F2937]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
           <div>
-            <h1 className="text-xl font-extrabold text-gray-900">{t.resultsTitle}</h1>
-            <p className="text-xs text-gray-500">
-              GSSS 52 LNP (MANJHUWAS) &bull; {activeTestInfo ? (isHi ? activeTestInfo.titleHi || activeTestInfo.title : activeTestInfo.title) : (isHi ? 'कक्षा 10 मूल्यांकन रिपोर्ट' : 'Class 10 Assessment Report Card')}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{t.resultsTitle}</h1>
+            <p className="text-xs sm:text-sm text-gray-500">
+              GSSS 52 LNP (MANJHUWAS) &bull; {activeTestInfo ? (isHi ? activeTestInfo.titleHi || activeTestInfo.title : activeTestInfo.title) : (isHi ? 'मूल्यांकन रिपोर्ट' : 'Assessment Report Card')}
             </p>
           </div>
 
-          <button
-            onClick={() => window.print()}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-[#F3EFFF] text-[#7F58FA] hover:bg-[#7F58FA] hover:text-white text-xs font-bold transition-all shadow-sm"
-          >
-            <DownloadIcon className="w-3.5 h-3.5" />
-            <span>{t.downloadReport}</span>
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => onNavigate('catalog')}
+              className="px-5 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs font-bold transition-all shadow-md shadow-[#7F58FA]/20"
+            >
+              {isHi ? '← अन्य टेस्ट दें' : '← Take Another Test'}
+            </button>
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-purple-200 bg-[#F3EFFF] text-[#7F58FA] hover:bg-[#7F58FA] hover:text-white text-xs font-bold transition-all shadow-sm"
+            >
+              <DownloadIcon className="w-3.5 h-3.5" />
+              <span>{t.downloadReport}</span>
+            </button>
+          </div>
         </header>
 
-        <main className="p-6 sm:p-8 space-y-7 max-w-7xl">
+        <main className="space-y-7">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
             {/* Donut Score Gauge */}

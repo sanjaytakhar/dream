@@ -6,7 +6,7 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
   const t = translations[lang] || translations.en;
 
   return (
-    <header className="w-full bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] sticky top-[41px] z-40 transition-all">
+    <header className="w-full bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] sticky top-0 z-40 transition-all shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Logo & School Branding */}
         <div onClick={() => onNavigate('landing')} className="flex items-center gap-3 cursor-pointer">
@@ -22,8 +22,8 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           </div>
         </div>
 
-        {/* Center Links */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-gray-600">
+        {/* Center Links: Home & Mock Tests Only */}
+        <nav className="hidden sm:flex items-center gap-7 text-sm font-medium text-gray-600">
           <button 
             onClick={() => onNavigate('landing')}
             className="text-[#7F58FA] font-bold transition-colors hover:text-[#6C44E8]"
@@ -32,21 +32,9 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           </button>
           <button 
             onClick={() => onNavigate('catalog')}
-            className="text-gray-600 hover:text-[#7F58FA] transition-colors"
+            className="text-gray-600 hover:text-[#7F58FA] transition-colors font-semibold"
           >
-            {t.navExams}
-          </button>
-          <button 
-            onClick={() => onNavigate('dashboard')}
-            className="text-gray-600 hover:text-[#7F58FA] transition-colors"
-          >
-            {lang === 'hi' ? 'विद्यार्थी पोर्टल' : 'Student Portal'}
-          </button>
-          <button 
-            onClick={() => onNavigate('admin')}
-            className="text-gray-600 hover:text-[#7F58FA] transition-colors"
-          >
-            {lang === 'hi' ? 'शिक्षक पोर्टल' : 'Faculty'}
+            {lang === 'hi' ? 'मॉक टेस्ट (कक्षा 6–12)' : 'Mock Tests (Class 6–12)'}
           </button>
         </nav>
 

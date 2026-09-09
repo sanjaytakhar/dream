@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { ScreenSwitcher } from './components/common/ScreenSwitcher';
 import { Navbar } from './components/common/Navbar';
-import { DesignSystemBar } from './components/common/DesignSystemBar';
 
 import { LandingPage } from './components/screens/LandingPage';
-import { StudentDashboard } from './components/screens/StudentDashboard';
 import { MockTestsCatalog } from './components/screens/MockTestsCatalog';
 import { ExamEngine } from './components/screens/ExamEngine';
 import { TestResults } from './components/screens/TestResults';
-import { AdminDashboard } from './components/screens/AdminDashboard';
-import { QuestionCreator } from './components/screens/QuestionCreator';
 
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
@@ -23,12 +18,11 @@ import {
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState('landing');
-  const [lang, setLang] = useState('hi'); // Defaulting to Hindi or easily toggleable
+  const [lang, setLang] = useState('hi'); // Defaulting to Hindi
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
-  const [activeTest, setActiveTest] = useState(mockTests[0]); // Default to active test
-  const [activeQuestions, setActiveQuestions] = useState(class11CsQuestions);
+  const [activeTest, setActiveTest] = useState(mockTests[0]);
+  const [activeQuestions, setActiveQuestions] = useState(class8CropQuestions);
   const [examSummary, setExamSummary] = useState(null);
-  const [customQuestions, setCustomQuestions] = useState([]);
 
   const toggleLang = () => {
     setLang((prev) => (prev === 'en' ? 'hi' : 'en'));
@@ -75,47 +69,30 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleQuestionCreated = (question) => {
-    setCustomQuestions((prev) => [question, ...prev]);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFAFF] font-sans antialiased text-[#1F2937]">
-      {/* Top Floating Screen Navigator with Hindi/English Toggle */}
-      <ScreenSwitcher
-        currentScreen={currentScreen}
-        onSelectScreen={(screenId) => {
-          setCurrentScreen(screenId);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        lang={lang}
-        onToggleLang={toggleLang}
-      />
-
-      {/* Conditional Top Navbar on public pages */}
-      {(currentScreen === 'landing') && (
+      {/* Clean School Header across all browsing pages */}
+      {currentScreen !== 'cbt' && (
         <Navbar
-          onNavigate={setCurrentScreen}
+          onNavigate={(screen) => {
+            setCurrentScreen(screen);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           lang={lang}
           onToggleLang={toggleLang}
         />
       )}
 
-      {/* Main Screen View with Language prop */}
+      {/* Main Student Portal View */}
       <div className="flex-1">
         {currentScreen === 'landing' && (
           <LandingPage
-            onNavigate={setCurrentScreen}
+            onNavigate={(screen) => {
+              setCurrentScreen(screen);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             onStartTest={handleStartExam}
             onSelectClassFilter={(cls) => setSelectedClassFilter(cls)}
-            lang={lang}
-          />
-        )}
-
-        {currentScreen === 'dashboard' && (
-          <StudentDashboard
-            onNavigate={setCurrentScreen}
-            onStartTest={handleStartExam}
             lang={lang}
           />
         )}
@@ -123,7 +100,10 @@ export function App() {
         {currentScreen === 'catalog' && (
           <MockTestsCatalog
             selectedClassFilter={selectedClassFilter}
-            onNavigate={setCurrentScreen}
+            onNavigate={(screen) => {
+              setCurrentScreen(screen);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             onStartTest={handleStartExam}
             lang={lang}
           />
@@ -144,29 +124,14 @@ export function App() {
             examSummary={examSummary}
             questions={activeQuestions}
             testInfo={activeTest}
-            onNavigate={setCurrentScreen}
-            lang={lang}
-          />
-        )}
-
-        {currentScreen === 'admin' && (
-          <AdminDashboard
-            onNavigate={setCurrentScreen}
-            lang={lang}
-          />
-        )}
-
-        {currentScreen === 'question-creator' && (
-          <QuestionCreator
-            onNavigate={setCurrentScreen}
-            onQuestionCreated={handleQuestionCreated}
+            onNavigate={(screen) => {
+              setCurrentScreen(screen);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             lang={lang}
           />
         )}
       </div>
-
-      {/* Bottom Live Design System Token Specs */}
-      <DesignSystemBar />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StudentSidebar } from '../common/Sidebar';
 import { SearchIcon, StarIcon } from '../common/Icons';
 import { mockTests } from '../../data/mockData';
 import { translations } from '../../data/translations';
@@ -55,24 +54,20 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
   });
 
   return (
-    <div className="min-h-screen bg-[#FDFAFF] flex">
-      <StudentSidebar activeTab="My Tests" onNavigate={onNavigate} />
-
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <header className="h-16 bg-white border-b border-[#E5E7EB] px-6 flex items-center justify-between sticky top-[41px] z-30">
+    <div className="min-h-screen bg-[#FDFAFF] text-[#1F2937]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
           <div>
-            <h1 className="text-xl font-extrabold text-gray-900">{t.catalogTitle}</h1>
-            <p className="text-xs text-gray-500">GSSS 52 LNP (MANJHUWAS) &bull; {t.catalogSubtitle}</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-[#7F58FA] text-xs font-bold border border-purple-100 mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>GSSS 52 LNP (MANJHUWAS) &bull; {isHi ? 'कक्षा 6 से 12' : 'Classes 6 to 12'}</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{t.catalogTitle}</h1>
+            <p className="text-xs sm:text-sm text-gray-500">{t.catalogSubtitle}</p>
           </div>
-          <button 
-            onClick={() => onNavigate('question-creator')}
-            className="px-4 py-2 rounded-full bg-[#F3EFFF] text-[#7F58FA] hover:bg-[#7F58FA] hover:text-white text-xs font-bold transition-all border border-purple-200 shadow-sm"
-          >
-            {isHi ? '+ नया प्रश्न बनाएं' : '+ Create Class Test'}
-          </button>
         </header>
 
-        <main className="p-6 sm:p-8 space-y-6 max-w-7xl">
+        <main className="space-y-6">
           {/* Filter Bar with School Class */}
           <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-soft flex flex-wrap items-center gap-3">
             {/* School Class */}
