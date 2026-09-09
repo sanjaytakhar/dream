@@ -22,13 +22,18 @@ import {
   class8CombinedResourcesQuestions,
   class8GrandMasterQuestions
 } from './data/class8ScienceQuestions';
+import {
+  class6MathsTest1Questions,
+  class6MathsTest2Questions,
+  class6MathsTest3Questions
+} from './data/class6MathsQuestions';
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState('landing');
   const [lang, setLang] = useState('hi'); // Defaulting to Hindi
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
   const [activeTest, setActiveTest] = useState(mockTests[0]);
-  const [activeQuestions, setActiveQuestions] = useState(class12CsBoard2025Questions);
+  const [activeQuestions, setActiveQuestions] = useState(class6MathsTest1Questions);
   const [examSummary, setExamSummary] = useState(null);
   const [loadingOverlay, setLoadingOverlay] = useState(null);
 
@@ -47,8 +52,15 @@ export function App() {
     }
     setActiveTest(test);
 
+    // Class 6 Mathematics Chapter 10 Tests
+    if (test.id === 'c6-maths-ch10-t1') {
+      setActiveQuestions(class6MathsTest1Questions);
+    } else if (test.id === 'c6-maths-ch10-t2') {
+      setActiveQuestions(class6MathsTest2Questions);
+    } else if (test.id === 'c6-maths-ch10-t3') {
+      setActiveQuestions(class6MathsTest3Questions);
     // Class 12 Board Computer Science Papers
-    if (test.id === 'c12-cs-board-2025') {
+    } else if (test.id === 'c12-cs-board-2025') {
       setActiveQuestions(class12CsBoard2025Questions);
     } else if (test.id === 'c12-cs-board-2023') {
       setActiveQuestions(class12CsBoard2023Questions);
