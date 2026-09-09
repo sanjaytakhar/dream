@@ -19,10 +19,9 @@ export const StudentSidebar = ({ activeTab = 'Dashboard', onNavigate }) => {
     { id: 'practice', label: 'Practice', icon: CheckIcon, screen: 'cbt' },
     { id: 'performance', label: 'Performance', icon: BarChartIcon, screen: 'results' },
     { id: 'bookmarks', label: 'Bookmarks', icon: BookmarkIcon, screen: 'catalog' },
-    { id: 'notes', label: 'My Notes', icon: BookOpenIcon, screen: 'profile' },
+    { id: 'notes', label: 'Study Material', icon: BookOpenIcon, screen: 'catalog' },
     { id: 'leaderboard', label: 'Leaderboard', icon: TrophyIcon, screen: 'dashboard' },
     { id: 'notifications', label: 'Notifications', icon: BellIcon, badge: '3', screen: 'dashboard' },
-    { id: 'profile', label: 'Profile', icon: UserIcon, screen: 'profile' },
     { id: 'settings', label: 'Settings', icon: SettingsIcon, screen: 'dashboard' },
   ];
 
@@ -82,7 +81,6 @@ export const StudentSidebar = ({ activeTab = 'Dashboard', onNavigate }) => {
 export const AdminSidebar = ({ activeTab = 'Dashboard', onNavigate }) => {
   const adminItems = [
     { id: 'admin-dash', label: 'Admin Dashboard', icon: LayoutDashboardIcon, screen: 'admin' },
-    { id: 'admin-users', label: 'Users', icon: UserIcon, screen: 'admin' },
     { id: 'admin-tests', label: 'Test Management', icon: BookOpenIcon, screen: 'catalog' },
     { id: 'admin-questions', label: 'Question Bank', icon: BookOpenIcon, screen: 'question-creator' },
     { id: 'admin-analytics', label: 'Analytics', icon: BarChartIcon, screen: 'admin' },

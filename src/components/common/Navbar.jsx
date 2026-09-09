@@ -2,7 +2,7 @@ import React from 'react';
 import { Logo, SearchIcon } from './Icons';
 import { translations } from '../../data/translations';
 
-export const Navbar = ({ onNavigate, onOpenLogin, onOpenGetStarted, lang = 'en', onToggleLang }) => {
+export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
   const t = translations[lang] || translations.en;
 
   return (
@@ -40,7 +40,7 @@ export const Navbar = ({ onNavigate, onOpenLogin, onOpenGetStarted, lang = 'en',
             onClick={() => onNavigate('dashboard')}
             className="text-gray-600 hover:text-[#7F58FA] transition-colors"
           >
-            {t.navPricing}
+            {lang === 'hi' ? 'विद्यार्थी पोर्टल' : 'Student Portal'}
           </button>
           <button 
             onClick={() => onNavigate('admin')}
@@ -48,15 +48,9 @@ export const Navbar = ({ onNavigate, onOpenLogin, onOpenGetStarted, lang = 'en',
           >
             {lang === 'hi' ? 'शिक्षक पोर्टल' : 'Faculty'}
           </button>
-          <button 
-            onClick={() => onNavigate('profile')}
-            className="text-gray-600 hover:text-[#7F58FA] transition-colors"
-          >
-            {t.navAbout}
-          </button>
         </nav>
 
-        {/* Right Actions: Hindi/English Switcher & Login */}
+        {/* Right Actions: Hindi/English Switcher & Direct Start Test */}
         <div className="flex items-center gap-2.5 sm:gap-3">
           {/* Language Switcher Pill */}
           <button
@@ -77,17 +71,11 @@ export const Navbar = ({ onNavigate, onOpenLogin, onOpenGetStarted, lang = 'en',
           </button>
 
           <button 
-            onClick={onOpenLogin}
-            className="text-xs sm:text-sm font-semibold text-gray-700 hover:text-[#7F58FA] px-2 sm:px-3 py-2 transition-colors"
+            onClick={() => onNavigate('catalog')}
+            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0 flex items-center gap-1.5"
           >
-            {t.login}
-          </button>
-
-          <button 
-            onClick={onOpenGetStarted}
-            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0"
-          >
-            {t.getStarted}
+            <span>📝</span>
+            <span>{lang === 'hi' ? 'मॉक टेस्ट शुरू करें' : 'Start Mock Test'}</span>
           </button>
         </div>
       </div>

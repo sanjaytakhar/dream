@@ -2,14 +2,12 @@ import React from 'react';
 
 const screens = [
   { id: 'landing', labelEn: 'Landing Page', labelHi: 'मुख्य पृष्ठ', icon: '🏠' },
-  { id: 'auth', labelEn: 'Login / Auth', labelHi: 'लॉगिन पोर्टल', icon: '🔐' },
   { id: 'dashboard', labelEn: 'Student Dashboard', labelHi: 'विद्यार्थी डैशबोर्ड', icon: '📊' },
   { id: 'catalog', labelEn: 'Mock Tests (6–12)', labelHi: 'मॉक टेस्ट (6-12)', icon: '📚' },
   { id: 'cbt', labelEn: 'CBT Simulator', labelHi: 'ऑनलाइन परीक्षा', icon: '⏱️' },
   { id: 'results', labelEn: 'Report Card', labelHi: 'अंक तालिका', icon: '📈' },
   { id: 'admin', labelEn: 'School Admin', labelHi: 'शिक्षक व्यवस्थापक', icon: '🛠️' },
   { id: 'question-creator', labelEn: 'Create Question', labelHi: 'प्रश्न निर्माण', icon: '✍️' },
-  { id: 'profile', labelEn: 'Student Profile', labelHi: 'छात्र प्रोफाइल', icon: '👤' },
 ];
 
 export const ScreenSwitcher = ({ currentScreen, onSelectScreen, lang = 'en', onToggleLang }) => {

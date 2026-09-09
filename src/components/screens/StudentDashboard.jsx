@@ -30,24 +30,12 @@ export const StudentDashboard = ({ onNavigate, onStartTest, lang = 'en' }) => {
               <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#FFB3C7] rounded-full border-2 border-white"></span>
             </button>
 
-            {/* Student Profile Info */}
-            <div 
-              onClick={() => onNavigate('profile')}
-              className="flex items-center gap-3 pl-2 cursor-pointer group"
-            >
-              <img
-                src={studentProfile.avatar}
-                alt={studentProfile.name}
-                className="w-9 h-9 rounded-full object-cover border-2 border-[#7F58FA] shadow-sm"
-              />
-              <div className="hidden sm:block text-left">
-                <p className="text-xs font-bold text-gray-900 group-hover:text-[#7F58FA] transition-colors">
-                  {isHi ? studentProfile.nameHi : studentProfile.name}
-                </p>
-                <p className="text-[11px] text-gray-500">
-                  {isHi ? studentProfile.gradeHi : studentProfile.grade}
-                </p>
-              </div>
+            {/* School Student Portal Badge (Direct Access) */}
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200/60 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-xs font-bold text-[#7F58FA]">
+                {isHi ? 'खुला विद्यार्थी पोर्टल' : 'Open Student Portal'}
+              </span>
             </div>
           </div>
         </header>
@@ -58,15 +46,15 @@ export const StudentDashboard = ({ onNavigate, onStartTest, lang = 'en' }) => {
           <div className="bg-gradient-to-r from-[#F3EFFF] via-white to-[#FFF0F4] border border-purple-100 rounded-3xl p-6 sm:p-7 shadow-soft flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-purple-100 text-[#7F58FA] text-[11px] font-bold mb-2">
-                <span>🏫 {isHi ? studentProfile.schoolNameHi : studentProfile.schoolName}</span>
+                <span>🏫 {isHi ? 'रा.उ.मा.वि. 52 एलएनपी (मांझूवास)' : 'GSSS 52 LNP (MANJHUWAS)'}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-                {t.goodMorning}, {isHi ? studentProfile.nameHi : studentProfile.name}! 👋
+                {isHi ? 'स्वागतम् विद्यार्थियों! 👋' : 'Welcome, Students! 👋'}
               </h1>
               <p className="text-sm text-gray-600 mt-1">
                 {isHi 
-                  ? `पंजीकृत: ${studentProfile.gradeHi} • सत्र 2025-26 • टर्म 1 मूल्यांकन`
-                  : `Enrolled in ${studentProfile.grade} • Session 2025-26 • Term 1 Assessment`}
+                  ? 'कक्षा 6 से 12 • सत्र 2025-26 • सीधे मॉक टेस्ट दें बिना किसी लॉगिन के'
+                  : 'Classes 6 to 12 • Session 2025-26 • Take mock tests directly without any login'}
               </p>
             </div>
 

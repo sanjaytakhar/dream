@@ -4,14 +4,12 @@ import { Navbar } from './components/common/Navbar';
 import { DesignSystemBar } from './components/common/DesignSystemBar';
 
 import { LandingPage } from './components/screens/LandingPage';
-import { AuthModal } from './components/screens/AuthModal';
 import { StudentDashboard } from './components/screens/StudentDashboard';
 import { MockTestsCatalog } from './components/screens/MockTestsCatalog';
 import { ExamEngine } from './components/screens/ExamEngine';
 import { TestResults } from './components/screens/TestResults';
 import { AdminDashboard } from './components/screens/AdminDashboard';
 import { QuestionCreator } from './components/screens/QuestionCreator';
-import { StudentProfile } from './components/screens/StudentProfile';
 
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
@@ -81,18 +79,6 @@ export function App() {
     setCustomQuestions((prev) => [question, ...prev]);
   };
 
-  const handleLoginSuccess = (role, studentClass) => {
-    if (role === 'admin') {
-      setCurrentScreen('admin');
-    } else {
-      if (studentClass) {
-        setSelectedClassFilter(studentClass);
-      }
-      setCurrentScreen('dashboard');
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFAFF] font-sans antialiased text-[#1F2937]">
       {/* Top Floating Screen Navigator with Hindi/English Toggle */}
@@ -110,8 +96,6 @@ export function App() {
       {(currentScreen === 'landing') && (
         <Navbar
           onNavigate={setCurrentScreen}
-          onOpenLogin={() => setCurrentScreen('auth')}
-          onOpenGetStarted={() => setCurrentScreen('dashboard')}
           lang={lang}
           onToggleLang={toggleLang}
         />
@@ -124,16 +108,6 @@ export function App() {
             onNavigate={setCurrentScreen}
             onStartTest={handleStartExam}
             onSelectClassFilter={(cls) => setSelectedClassFilter(cls)}
-            onOpenAuth={() => setCurrentScreen('auth')}
-            lang={lang}
-          />
-        )}
-
-        {currentScreen === 'auth' && (
-          <AuthModal
-            isOpen={true}
-            onClose={() => setCurrentScreen('landing')}
-            onLoginSuccess={handleLoginSuccess}
             lang={lang}
           />
         )}
@@ -186,13 +160,6 @@ export function App() {
           <QuestionCreator
             onNavigate={setCurrentScreen}
             onQuestionCreated={handleQuestionCreated}
-            lang={lang}
-          />
-        )}
-
-        {currentScreen === 'profile' && (
-          <StudentProfile
-            onNavigate={setCurrentScreen}
             lang={lang}
           />
         )}

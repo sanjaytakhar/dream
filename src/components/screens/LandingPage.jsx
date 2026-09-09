@@ -89,13 +89,13 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
-                onClick={() => onNavigate('dashboard')}
+                onClick={() => onNavigate('catalog')}
                 className="px-7 py-3.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/30 hover:shadow-[#7F58FA]/40 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 {t.startFree}
               </button>
               <button
-                onClick={() => onStartTest('c11-cs-python')}
+                onClick={() => onStartTest('c8-sci-t1-crops')}
                 className="px-7 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 {t.sampleTest}
@@ -237,16 +237,16 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
-              onClick={() => onNavigate('dashboard')}
+              onClick={() => onNavigate('catalog')}
               className="px-6 py-3 rounded-full bg-white text-[#7F58FA] font-bold text-xs sm:text-sm shadow-md hover:bg-purple-50 transition-all hover:scale-105"
             >
-              {t.enterPortal}
+              {lang === 'hi' ? 'सभी मॉक टेस्ट देखें' : 'Explore All Tests'}
             </button>
             <button
               onClick={() => onNavigate('admin')}
               className="px-6 py-3 rounded-full bg-purple-900/40 border border-white/30 text-white font-semibold text-xs sm:text-sm hover:bg-purple-900/60 transition-all"
             >
-              {t.teacherLogin}
+              {lang === 'hi' ? 'शिक्षक पोर्टल' : 'Faculty Portal'}
             </button>
           </div>
         </div>
