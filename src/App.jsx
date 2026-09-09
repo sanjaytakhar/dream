@@ -10,6 +10,12 @@ import { TestResults } from './components/screens/TestResults';
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
 import {
+  class12CsBoard2025Questions,
+  class12CsBoard2023Questions,
+  class12CsBoard2022Questions,
+  class12CsGrandMasterQuestions
+} from './data/class12CsQuestions';
+import {
   class8CropQuestions,
   class8CoalQuestions,
   class8ConservationQuestions,
@@ -22,7 +28,7 @@ export function App() {
   const [lang, setLang] = useState('hi'); // Defaulting to Hindi
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
   const [activeTest, setActiveTest] = useState(mockTests[0]);
-  const [activeQuestions, setActiveQuestions] = useState(class8CropQuestions);
+  const [activeQuestions, setActiveQuestions] = useState(class12CsBoard2025Questions);
   const [examSummary, setExamSummary] = useState(null);
   const [loadingOverlay, setLoadingOverlay] = useState(null);
 
@@ -41,7 +47,17 @@ export function App() {
     }
     setActiveTest(test);
 
-    if (test.id === 'c8-sci-t1-crops') {
+    // Class 12 Board Computer Science Papers
+    if (test.id === 'c12-cs-board-2025') {
+      setActiveQuestions(class12CsBoard2025Questions);
+    } else if (test.id === 'c12-cs-board-2023') {
+      setActiveQuestions(class12CsBoard2023Questions);
+    } else if (test.id === 'c12-cs-board-2022') {
+      setActiveQuestions(class12CsBoard2022Questions);
+    } else if (test.id === 'c12-cs-grand-master') {
+      setActiveQuestions(class12CsGrandMasterQuestions);
+    // Class 8 Science Tests
+    } else if (test.id === 'c8-sci-t1-crops') {
       setActiveQuestions(class8CropQuestions);
     } else if (test.id === 'c8-sci-t2-coal-petro') {
       setActiveQuestions(class8CoalQuestions);
@@ -51,10 +67,10 @@ export function App() {
       setActiveQuestions(class8CombinedResourcesQuestions);
     } else if (test.id === 'c8-sci-t5-grand') {
       setActiveQuestions(class8GrandMasterQuestions);
+    // Class 11 CS
     } else if (
       test.id === 'c11-cs-python' ||
-      test.subject === 'Computer Science' ||
-      (test.title && test.title.includes('Computer Science'))
+      (test.schoolClass === 'Class 11' && test.subject === 'Computer Science')
     ) {
       setActiveQuestions(class11CsQuestions);
     } else {
