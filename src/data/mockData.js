@@ -1,0 +1,375 @@
+// Classes 6 to 12 School Curriculum Structure for GSSS 52 LNP (MANJHUWAS)
+export const schoolClasses = [
+  { id: 'class-6', grade: 'Class 6', label: 'Class 6', labelHi: 'कक्षा 6', category: 'Middle School', categoryHi: 'उच्च प्राथमिक', color: '#7F58FA', bg: '#F3EFFF', icon: '🎒', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
+  { id: 'class-7', grade: 'Class 7', label: 'Class 7', labelHi: 'कक्षा 7', category: 'Middle School', categoryHi: 'उच्च प्राथमिक', color: '#60D6A7', bg: '#E9FBF3', icon: '📐', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
+  { id: 'class-8', grade: 'Class 8', label: 'Class 8', labelHi: 'कक्षा 8', category: 'Middle School', categoryHi: 'उच्च प्राथमिक', color: '#3B82F6', bg: '#EFF6FF', icon: '🔬', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
+  { id: 'class-9', grade: 'Class 9', label: 'Class 9', labelHi: 'कक्षा 9', category: 'Secondary', categoryHi: 'माध्यमिक', color: '#EC4899', bg: '#FDF2F8', icon: '📘', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
+  { id: 'class-10', grade: 'Class 10', label: 'Class 10 (Board)', labelHi: 'कक्षा 10 (बोर्ड)', category: 'Secondary', categoryHi: 'माध्यमिक बोर्ड', color: '#F59E0B', bg: '#FFFBEB', icon: '🎯', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
+  { id: 'class-11', grade: 'Class 11', label: 'Class 11', labelHi: 'कक्षा 11', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक', color: '#8B5CF6', bg: '#F5F3FF', icon: '⚛️', subjects: ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
+  { id: 'class-12', grade: 'Class 12', label: 'Class 12 (Board)', labelHi: 'कक्षा 12 (बोर्ड)', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक बोर्ड', color: '#10B981', bg: '#ECFDF5', icon: '🎓', subjects: ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
+];
+
+export const popularExams = schoolClasses.map(c => ({
+  id: c.id,
+  name: c.label,
+  subtitle: c.category,
+  icon: c.icon,
+  color: c.color,
+  bg: c.bg
+}));
+
+export const mockTests = [
+  {
+    id: 'c10-maths-term1',
+    title: 'Class 10 - Mathematics (Term 1 Board Mock)',
+    titleHi: 'कक्षा 10 - गणित (टर्म 1 बोर्ड अभ्यास मॉक टेस्ट)',
+    schoolClass: 'Class 10',
+    subject: 'Mathematics',
+    subjectHi: 'गणित',
+    difficulty: 'Medium',
+    testType: 'Term Exam',
+    questionsCount: 40,
+    durationMins: 90,
+    totalMarks: 80,
+    attempts: 420,
+    rating: 4.8,
+    tags: ['Class 10', 'Board Prep', 'Term 1'],
+    featured: true,
+  },
+  {
+    id: 'c12-physics-finals',
+    title: 'Class 12 - Physics (Mechanics & Electrodynamics)',
+    titleHi: 'कक्षा 12 - भौतिक विज्ञान (यांत्रिकी एवं वैद्युतिकी)',
+    schoolClass: 'Class 12',
+    subject: 'Physics',
+    subjectHi: 'भौतिक विज्ञान',
+    difficulty: 'Hard',
+    testType: 'Term Exam',
+    questionsCount: 35,
+    durationMins: 120,
+    totalMarks: 70,
+    attempts: 310,
+    rating: 4.7,
+    tags: ['Class 12', 'Science Stream', 'Pre-Board'],
+    featured: true,
+  },
+  {
+    id: 'c10-science-light',
+    title: 'Class 10 - Science (Light: Reflection & Refraction)',
+    titleHi: 'कक्षा 10 - विज्ञान (प्रकाश: परावर्तन एवं अपवर्तन)',
+    schoolClass: 'Class 10',
+    subject: 'Science',
+    subjectHi: 'विज्ञान',
+    difficulty: 'Medium',
+    testType: 'Chapter Test',
+    questionsCount: 25,
+    durationMins: 45,
+    totalMarks: 50,
+    attempts: 540,
+    rating: 4.6,
+    tags: ['Class 10', 'Chapter Test', 'Science'],
+    featured: true,
+  },
+  {
+    id: 'c8-science-cells',
+    title: 'Class 8 - Science (Cell Structure & Functions)',
+    titleHi: 'कक्षा 8 - विज्ञान (कोशिका संरचना एवं प्रकार्य)',
+    schoolClass: 'Class 8',
+    subject: 'Science',
+    subjectHi: 'विज्ञान',
+    difficulty: 'Easy',
+    testType: 'Unit Test',
+    questionsCount: 20,
+    durationMins: 30,
+    totalMarks: 40,
+    attempts: 380,
+    rating: 4.6,
+    tags: ['Class 8', 'Unit Test', 'Biology'],
+    featured: true,
+  },
+  {
+    id: 'c6-maths-integers',
+    title: 'Class 6 - Mathematics (Integers & Fractions Mastery)',
+    titleHi: 'कक्षा 6 - गणित (पूर्णांक एवं भिन्न अभ्यास)',
+    schoolClass: 'Class 6',
+    subject: 'Mathematics',
+    subjectHi: 'गणित',
+    difficulty: 'Easy',
+    testType: 'Chapter Test',
+    questionsCount: 20,
+    durationMins: 30,
+    totalMarks: 40,
+    attempts: 290,
+    rating: 4.5,
+    tags: ['Class 6', 'Chapter Test', 'Basics'],
+    featured: false,
+  },
+  {
+    id: 'c9-social-french-rev',
+    title: 'Class 9 - Social Science (Democratic Politics & Geography)',
+    titleHi: 'कक्षा 9 - सामाजिक विज्ञान (लोकतांत्रिक राजनीति एवं भूगोल)',
+    schoolClass: 'Class 9',
+    subject: 'Social Science',
+    subjectHi: 'सामाजिक विज्ञान',
+    difficulty: 'Medium',
+    testType: 'Unit Test',
+    questionsCount: 30,
+    durationMins: 45,
+    totalMarks: 50,
+    attempts: 310,
+    rating: 4.5,
+    tags: ['Class 9', 'Unit Test', 'Social Science'],
+    featured: false,
+  },
+  {
+    id: 'c12-chemistry-organic',
+    title: 'Class 12 - Chemistry (Haloalkanes & Biomolecules)',
+    titleHi: 'कक्षा 12 - रसायन विज्ञान (हैलोऐल्केन एवं जैव अणु)',
+    schoolClass: 'Class 12',
+    subject: 'Chemistry',
+    subjectHi: 'रसायन विज्ञान',
+    difficulty: 'Hard',
+    testType: 'Chapter Test',
+    questionsCount: 30,
+    durationMins: 60,
+    totalMarks: 70,
+    attempts: 240,
+    rating: 4.6,
+    tags: ['Class 12', 'Chapter Test', 'Chemistry'],
+    featured: false,
+  },
+  {
+    id: 'c7-maths-algebra',
+    title: 'Class 7 - Mathematics (Algebraic Expressions)',
+    titleHi: 'कक्षा 7 - गणित (बीजीय व्यंजक)',
+    schoolClass: 'Class 7',
+    subject: 'Mathematics',
+    subjectHi: 'गणित',
+    difficulty: 'Easy',
+    testType: 'Chapter Test',
+    questionsCount: 20,
+    durationMins: 30,
+    totalMarks: 40,
+    attempts: 270,
+    rating: 4.4,
+    tags: ['Class 7', 'Maths', 'Algebra'],
+    featured: false,
+  }
+];
+
+// Sample School Exam Questions
+export const defaultQuestions = [
+  {
+    id: 1,
+    section: 'Section A - Physics',
+    topic: 'Kinematics & Motion',
+    classLevel: 'Class 9-11',
+    question: 'A body is projected at an angle of 45° with a velocity of 20 m/s. The maximum height reached is: (Assume g = 10 m/s²)',
+    questionHi: 'एक पिंड को 20 m/s के वेग से 45° के कोण पर प्रक्षेपित किया जाता है। प्राप्त अधिकतम ऊंचाई होगी: (मानें g = 10 m/s²)',
+    options: [
+      { id: 'A', text: '10 m', textHi: '10 मीटर' },
+      { id: 'B', text: '20 m', textHi: '20 मीटर' },
+      { id: 'C', text: '15 m', textHi: '15 मीटर' },
+      { id: 'D', text: '5 m', textHi: '5 मीटर' }
+    ],
+    correctAnswer: 'A',
+    marks: 4,
+    negativeMarks: 0,
+    explanation: 'Maximum height H = (u² sin²θ) / (2g). Here u = 20 m/s, θ = 45°, and g = 10 m/s². Therefore, H = (400 × 0.5) / 20 = 200 / 20 = 10 m.',
+    explanationHi: 'अधिकतम ऊंचाई H = (u² sin²θ) / (2g)। यहाँ u = 20 m/s, θ = 45°, और g = 10 m/s²। अतः H = (400 × 0.5) / 20 = 10 मीटर।',
+    timeEstimate: '42s'
+  },
+  {
+    id: 2,
+    section: 'Section A - Science',
+    topic: 'Light & Optics (Class 10)',
+    classLevel: 'Class 10',
+    question: 'A convex lens has a focal length of 20 cm. At what distance from the lens should an object be placed to form a real, inverted image of the same size?',
+    questionHi: 'एक उत्तल लेंस की फोकस दूरी 20 सेमी है। लेंस से कितनी दूरी पर वस्तु को रखा जाए ताकि उसी आकार का वास्तविक एवं उल्टा प्रतिबिंब बने?',
+    options: [
+      { id: 'A', text: '10 cm', textHi: '10 सेमी' },
+      { id: 'B', text: '20 cm', textHi: '20 सेमी' },
+      { id: 'C', text: '40 cm (at 2F)', textHi: '40 सेमी (2F पर)' },
+      { id: 'D', text: '60 cm', textHi: '60 सेमी' }
+    ],
+    correctAnswer: 'C',
+    marks: 4,
+    negativeMarks: 0,
+    explanation: 'For a convex lens, when an object is placed at 2F (twice the focal length = 2 × 20 cm = 40 cm), the image formed is real, inverted, and of the exact same size as the object.',
+    explanationHi: 'उत्तल लेंस के लिए जब वस्तु 2F (फोकस दूरी का दोगुना = 2 × 20 = 40 सेमी) पर होती है, तब प्रतिबिंब समान आकार का वास्तविक और उल्टा बनता है।',
+    timeEstimate: '45s'
+  },
+  {
+    id: 3,
+    section: 'Section A - Mathematics',
+    topic: 'Linear Equations & Polynomials',
+    classLevel: 'Class 9-10',
+    question: 'If α and β are the zeroes of the quadratic polynomial P(x) = x² - 5x + 6, the value of (α + β) is:',
+    questionHi: 'यदि α तथा β द्विघात बहुपद P(x) = x² - 5x + 6 के शून्यक हैं, तो (α + β) का मान होगा:',
+    options: [
+      { id: 'A', text: '6', textHi: '6' },
+      { id: 'B', text: '-5', textHi: '-5' },
+      { id: 'C', text: '5', textHi: '5' },
+      { id: 'D', text: '-6', textHi: '-6' }
+    ],
+    correctAnswer: 'C',
+    marks: 4,
+    negativeMarks: 0,
+    explanation: 'For ax² + bx + c = 0, sum of roots α + β = -b/a = -(-5)/1 = 5.',
+    explanationHi: 'द्विघात बहुपद में शून्यकों का योग α + β = -b/a = -(-5)/1 = 5 होता है।',
+    timeEstimate: '30s'
+  },
+  {
+    id: 4,
+    section: 'Section A - Science',
+    topic: 'Cell Structure & Functions',
+    classLevel: 'Class 8-10',
+    question: 'Which cell organelle is known as the "Powerhouse of the Cell"?',
+    questionHi: 'किस कोशिकांग को "कोशिका का शक्तिगृह (पावरहाउस)" कहा जाता है?',
+    options: [
+      { id: 'A', text: 'Ribosome', textHi: 'राइबोसोम' },
+      { id: 'B', text: 'Golgi Apparatus', textHi: 'गॉल्जी काय' },
+      { id: 'C', text: 'Endoplasmic Reticulum', textHi: 'अंतःप्रद्रव्यी जालिका' },
+      { id: 'D', text: 'Mitochondria', textHi: 'माइटोकॉन्ड्रिया' }
+    ],
+    correctAnswer: 'D',
+    marks: 4,
+    negativeMarks: 0,
+    explanation: 'Mitochondria produce cellular energy in the form of ATP, hence known as the powerhouse of the cell.',
+    explanationHi: 'माइटोकॉन्ड्रिया एटीपी (ATP) के रूप में ऊर्जा का उत्पादन करते हैं, इसलिए इन्हें कोशिका का बिजलीघर कहते हैं।',
+    timeEstimate: '20s'
+  },
+  {
+    id: 5,
+    section: 'Section A - Mathematics',
+    topic: 'Geometry & Mensuration',
+    classLevel: 'Class 6-8',
+    question: 'The perimeter of a rectangular school playground is 120 meters. If its length is 40 meters, its breadth is:',
+    questionHi: 'विद्यालय के एक आयताकार खेल के मैदान का परिमाप 120 मीटर है। यदि इसकी लंबाई 40 मीटर है, तो चौड़ाई होगी:',
+    options: [
+      { id: 'A', text: '10 meters', textHi: '10 मीटर' },
+      { id: 'B', text: '20 meters', textHi: '20 मीटर' },
+      { id: 'C', text: '30 meters', textHi: '30 मीटर' },
+      { id: 'D', text: '25 meters', textHi: '25 मीटर' }
+    ],
+    correctAnswer: 'B',
+    marks: 4,
+    negativeMarks: 0,
+    explanation: 'Perimeter = 2(Length + Breadth) ⇒ 120 = 2(40 + B) ⇒ 60 = 40 + B ⇒ B = 20 meters.',
+    explanationHi: 'परिमाप = 2(लंबाई + चौड़ाई) ⇒ 120 = 2(40 + B) ⇒ 60 = 40 + B ⇒ B = 20 मीटर।',
+    timeEstimate: '25s'
+  }
+];
+
+export const studentProfile = {
+  name: 'Arjun Sharma',
+  nameHi: 'अर्जुन शर्मा',
+  schoolName: 'GSSS 52 LNP (MANJHUWAS)',
+  schoolNameHi: 'रा.उ.मा.वि. 52 एलएनपी (मांझूवास)',
+  admissionNo: 'GSSS52-2024-892',
+  grade: 'Class 10 - Section A',
+  gradeHi: 'कक्षा 10 - वर्ग अ',
+  email: 'arjun.52lnp@school.rajasthan.gov.in',
+  rollNo: '14',
+  location: '52 LNP, Manjhuwas, Rajasthan',
+  joined: 'Session 2025-26',
+  avatar: '/arjun-avatar.jpg',
+  stats: {
+    testsTaken: 24,
+    totalTestsProfile: 86,
+    avgScore: 84,
+    bestPercentile: 94.2,
+    currentStreak: 7,
+    classRank: 3,
+    totalInClass: 42,
+    schoolRank: 18,
+    totalInSchool: 840
+  },
+  progress: [
+    { subject: 'Mathematics', subjectHi: 'गणित', score: 88, color: '#7F58FA' },
+    { subject: 'Science', subjectHi: 'विज्ञान', score: 82, color: '#60D6A7' },
+    { subject: 'Social Science', subjectHi: 'सामाजिक विज्ञान', score: 79, color: '#FFB3C7' },
+    { subject: 'Hindi', subjectHi: 'हिंदी', score: 91, color: '#FDE68A' },
+    { subject: 'English', subjectHi: 'अंग्रेज़ी', score: 85, color: '#93C5FD' }
+  ],
+  recommendedTests: [
+    {
+      id: 'c10-maths-term1',
+      title: 'Class 10 - Mathematics',
+      titleHi: 'कक्षा 10 - गणित',
+      subtitle: 'Term 1 Board Mock Test',
+      subtitleHi: 'टर्म 1 बोर्ड परीक्षा अभ्यास',
+      questions: 40,
+      duration: '90 mins',
+      color: '#7F58FA'
+    },
+    {
+      id: 'c10-science-light',
+      title: 'Class 10 - Science',
+      titleHi: 'कक्षा 10 - विज्ञान',
+      subtitle: 'Optics: Reflection & Refraction',
+      subtitleHi: 'प्रकाश: परावर्तन एवं अपवर्तन',
+      questions: 25,
+      duration: '45 mins',
+      color: '#60D6A7'
+    },
+    {
+      id: 'c9-social-french-rev',
+      title: 'Class 10 - Social Science',
+      titleHi: 'कक्षा 10 - सामाजिक विज्ञान',
+      subtitle: 'Democratic Politics & Civics',
+      subtitleHi: 'लोकतांत्रिक राजनीति एवं नागरिक शास्त्र',
+      questions: 30,
+      duration: '45 mins',
+      color: '#FFB3C7'
+    }
+  ],
+  upcomingTests: [
+    {
+      title: 'Class 10 - Term 1 Mathematics Pre-Board',
+      titleHi: 'कक्षा 10 - गणित प्री-बोर्ड परीक्षा',
+      time: 'Tomorrow, 09:30 AM (GSSS 52 LNP Lab)',
+      timeHi: 'कल प्रातः 09:30 बजे (कंप्यूटर लैब, 52 एलएनपी)',
+      color: '#3B82F6'
+    },
+    {
+      title: 'Science Practical Revision Quiz',
+      titleHi: 'विज्ञान प्रायोगिक एवं थ्योरी क्विज',
+      time: '15 Sep 2026, 11:00 AM',
+      timeHi: '15 सितम्बर 2026, प्रातः 11:00 बजे',
+      color: '#F59E0B'
+    }
+  ],
+  badges: [
+    { id: 'first-mock', title: 'First Test Star', titleHi: 'प्रथम टेस्ट स्टार', desc: 'Completed first unit test at GSSS 52 LNP', icon: '🎯', unlocked: true, color: '#FEF3C7' },
+    { id: 'streak-7', title: '7-Day Study Streak', titleHi: '7 दिवसीय निरंतर अभ्यास', desc: 'Practiced every day for 7 consecutive days', icon: '🔥', unlocked: true, color: '#FFEDD5' },
+    { id: 'score-90', title: 'Class Topper (90%+)', titleHi: 'कक्षा टॉपर (90%+)', desc: 'Scored 90%+ in Mathematics Unit Test', icon: '🏆', unlocked: true, color: '#E0E7FF' },
+    { id: 'speed', title: 'Speed Solver', titleHi: 'त्वरित समाधानकर्ता', desc: 'Finished Term mock test with 100% accuracy', icon: '⚡', unlocked: true, color: '#DCFCE7' },
+    { id: 'homework-hero', title: 'Homework Hero', titleHi: 'गृहकार्य श्रेष्ठता', desc: '100% online homework test completion', icon: '📚', unlocked: true, color: '#FCE7F3' },
+    { id: 'subject-expert', title: 'Maths Scholar', titleHi: 'गणित विशारद', desc: 'Scored 85%+ across all maths assessments', icon: '⭐', unlocked: true, color: '#CCFBF1' }
+  ]
+};
+
+export const adminData = {
+  stats: {
+    students: '840',
+    classesCount: '7 Grades (6-12)',
+    tests: '56',
+    avgScore: '78.4%'
+  },
+  recentActivity: [
+    { id: 1, text: 'GSSS 52 LNP: Class 10 Science Term 1 Mock Test published', textHi: 'रा.उ.मा.वि. 52 एलएनपी: कक्षा 10 विज्ञान टर्म 1 टेस्ट जारी', time: '1 hour ago', timeHi: '1 घंटा पूर्व' },
+    { id: 2, text: 'Class 8-A submitted Mathematics Unit Test (38 students)', textHi: 'कक्षा 8-अ ने गणित यूनिट टेस्ट जमा किया (38 विद्यार्थी)', time: '2 hours ago', timeHi: '2 घंटे पूर्व' },
+    { id: 3, text: 'Class 12 Physics Pre-Board Results generated', textHi: 'कक्षा 12 भौतिक विज्ञान प्री-बोर्ड परीक्षा परिणाम तैयार', time: '4 hours ago', timeHi: '4 घंटे पूर्व' },
+    { id: 4, text: 'Principal issued Term 1 Schedule announcement for 52 LNP', textHi: 'प्रधानाचार्य द्वारा टर्म 1 परीक्षा समय सारणी जारी', time: '1 day ago', timeHi: '1 दिन पूर्व' }
+  ],
+  classPerformance: [
+    { name: 'Class 6', nameHi: 'कक्षा 6', score: 84, color: '#60D6A7' },
+    { name: 'Class 7', nameHi: 'कक्षा 7', score: 79, color: '#93C5FD' },
+    { name: 'Class 8', nameHi: 'कक्षा 8', score: 81, color: '#FDE68A' },
+    { name: 'Class 9', nameHi: 'कक्षा 9', score: 74, color: '#FFB3C7' },
+    { name: 'Class 10', nameHi: 'कक्षा 10', score: 86, color: '#7F58FA' },
+    { name: 'Class 11', nameHi: 'कक्षा 11', score: 72, color: '#F472B6' },
+    { name: 'Class 12', nameHi: 'कक्षा 12', score: 82, color: '#3B82F6' }
+  ]
+};
