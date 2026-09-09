@@ -31,20 +31,22 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3EFFF] text-[#7F58FA] text-xs font-bold border border-purple-100 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#7F58FA] animate-pulse"></span>
-              {t.schoolName} &bull; {t.classesRange}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#F3EFFF] text-[#7F58FA] text-xs font-bold border border-purple-100 shadow-sm">
+              <img src="./rajasthan-education-logo.png" alt="Emblem" className="w-4 h-4 object-contain" />
+              <span>{t.schoolName} &bull; {t.classesRange}</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-[1.15]">
-              {t.heroTitle1} <br />
+              {lang === 'hi' ? 'परीक्षा' : 'Pariksha'} <br />
               <span className="text-[#7F58FA] bg-clip-text text-transparent bg-gradient-to-r from-[#7F58FA] to-[#9B77FF]">
-                {t.heroTitle2}
+                {lang === 'hi' ? 'डिजिटल मूल्यांकन पोर्टल' : 'Digital Assessment Portal'}
               </span>
             </h1>
 
             <p className="text-gray-600 text-base sm:text-lg max-w-xl leading-relaxed">
-              {t.heroDesc}
+              {lang === 'hi' 
+                ? 'राजकीय उच्च माध्यमिक विद्यालय 52 एलएनपी (मांझूवास) के कक्षा 6 से 12 तक के विद्यार्थियों हेतु ऑनलाइन कंप्यूटर आधारित (CBT) मॉक टेस्ट एवं अभ्यास पोर्टल।'
+                : 'Computer Based Test (CBT) mock tests and digital practice platform for students of GSSS 52 LNP (Manjhuwas) from Class 6 to 12.'}
             </p>
 
             {/* Class Quick-Select Pills */}
@@ -90,45 +92,61 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 onClick={() => onNavigate('catalog')}
-                className="px-7 py-3.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/30 hover:shadow-[#7F58FA]/40 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="px-7 py-3.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/30 hover:shadow-[#7F58FA]/40 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
               >
-                {t.startFree}
+                <span>📝</span>
+                <span>{lang === 'hi' ? 'मॉक टेस्ट शुरू करें' : 'Start Mock Tests'}</span>
               </button>
               <button
                 onClick={() => onStartTest('c8-sci-t1-crops')}
                 className="px-7 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                {t.sampleTest}
+                {lang === 'hi' ? 'कक्षा 8 विज्ञान टेस्ट' : 'Class 8 Science Test'}
               </button>
             </div>
           </div>
 
-          {/* Right Column: 3D Illustration & Floating Notes */}
+          {/* Right Column: Actual School Building Photo & Official Badges */}
           <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-md bg-gradient-to-b from-[#F3EFFF]/60 to-white/80 p-6 rounded-3xl border border-purple-100 shadow-card flex flex-col items-center">
+            <div className="relative w-full max-w-md bg-gradient-to-b from-[#F3EFFF]/70 to-white p-5 rounded-3xl border border-purple-100 shadow-card flex flex-col items-center">
               
-              <div className="absolute -top-3 -left-4 bg-[#EFF6FF] border border-blue-200 text-[#1E40AF] px-4 py-2 rounded-2xl shadow-md rotate-[-6deg] text-xs font-bold leading-tight flex items-center gap-1.5">
-                <span>📝</span>
+              {/* Rajasthan Map Badge */}
+              <div className="absolute -top-3 -left-4 bg-[#EFF6FF] border border-blue-200 text-[#1E40AF] px-3.5 py-2 rounded-2xl shadow-md rotate-[-5deg] text-xs font-bold leading-tight flex items-center gap-2 z-10">
+                <img src="./rajasthan-map.png" alt="Rajasthan Map" className="w-7 h-7 object-contain drop-shadow-sm" />
                 <div>
-                  <div>{t.smallTests}</div>
-                  <div className="text-blue-700 font-extrabold">{t.bigDreams}</div>
+                  <div className="text-[10px] text-blue-600 font-semibold">{lang === 'hi' ? 'शिक्षा विभाग' : 'Dept. of Education'}</div>
+                  <div className="text-blue-800 font-extrabold text-xs">{lang === 'hi' ? 'राजस्थान सरकार' : 'Govt. of Rajasthan'}</div>
                 </div>
               </div>
 
-              <div className="absolute top-4 -right-3 bg-[#FEF9C3] border border-amber-200 text-amber-900 px-4 py-2.5 rounded-2xl shadow-md rotate-[8deg] text-xs font-bold leading-tight">
-                <div className="text-amber-800 font-extrabold text-sm">{t.youCanDoIt}</div>
+              {/* Education Logo Badge */}
+              <div className="absolute top-3 -right-3 bg-[#FEF9C3] border border-amber-200 text-amber-900 px-3.5 py-2 rounded-2xl shadow-md rotate-[5deg] text-xs font-bold leading-tight flex items-center gap-2 z-10">
+                <img src="./rajasthan-education-logo.png" alt="Education Seal" className="w-7 h-7 object-contain" />
+                <div>
+                  <div className="text-[10px] text-amber-700 font-semibold">{lang === 'hi' ? 'सतत् एवं व्यापक' : 'Continuous'}</div>
+                  <div className="text-amber-900 font-extrabold text-xs">{lang === 'hi' ? 'शिक्षा मूल्यांकन' : 'Evaluation'}</div>
+                </div>
               </div>
 
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 my-4 rounded-2xl overflow-hidden shadow-inner bg-gradient-to-tr from-purple-100 to-indigo-50 border-2 border-white flex items-center justify-center">
+              {/* Real School Building Photograph */}
+              <div className="relative w-full h-56 sm:h-64 mt-6 mb-3 rounded-2xl overflow-hidden shadow-md bg-gray-100 border-2 border-white group">
                 <img 
-                  src="/hero-student.jpg" 
-                  alt="School Student with Laptop" 
-                  className="w-full h-full object-cover rounded-2xl transition-transform hover:scale-105 duration-300"
+                  src="./school-building.jpg" 
+                  alt="राजकीय उच्च माध्यमिक विद्यालय 52 LNP (मांझूवास)" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 text-white">
+                  <p className="text-xs font-extrabold tracking-wide drop-shadow-sm">
+                    🏫 {lang === 'hi' ? 'राजकीय उच्च माध्यमिक विद्यालय 52 LNP (मांझूवास)' : 'GSSS 52 LNP (MANJHUWAS)'}
+                  </p>
+                  <p className="text-[10px] text-purple-200 font-medium mt-0.5">
+                    {lang === 'hi' ? 'ब्लॉक: पदमपुर • जिला: श्रीगंगानगर (राजस्थान)' : 'Block: Padampur • District: Sri Ganganagar (Raj.)'}
+                  </p>
+                </div>
               </div>
 
               {/* School Metric pill */}
-              <div className="w-full bg-white/95 backdrop-blur-sm rounded-xl p-3 border border-gray-100 flex items-center justify-around text-center mt-2 shadow-sm">
+              <div className="w-full bg-white/95 backdrop-blur-sm rounded-xl p-3 border border-gray-100 flex items-center justify-around text-center shadow-sm">
                 <div>
                   <p className="text-sm sm:text-base font-extrabold text-gray-900">
                     {lang === 'hi' ? 'कक्षा 6–12' : 'Class 6–12'}
@@ -238,15 +256,10 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
               onClick={() => onNavigate('catalog')}
-              className="px-6 py-3 rounded-full bg-white text-[#7F58FA] font-bold text-xs sm:text-sm shadow-md hover:bg-purple-50 transition-all hover:scale-105"
+              className="px-8 py-3.5 rounded-full bg-white text-[#7F58FA] font-bold text-xs sm:text-sm shadow-lg hover:bg-purple-50 transition-all hover:scale-105 flex items-center gap-2"
             >
-              {lang === 'hi' ? 'सभी मॉक टेस्ट देखें' : 'Explore All Tests'}
-            </button>
-            <button
-              onClick={() => onNavigate('admin')}
-              className="px-6 py-3 rounded-full bg-purple-900/40 border border-white/30 text-white font-semibold text-xs sm:text-sm hover:bg-purple-900/60 transition-all"
-            >
-              {lang === 'hi' ? 'शिक्षक पोर्टल' : 'Faculty Portal'}
+              <span>📝</span>
+              <span>{lang === 'hi' ? 'सभी मॉक टेस्ट देखें (कक्षा 6–12)' : 'Explore All Tests (Class 6–12)'}</span>
             </button>
           </div>
         </div>

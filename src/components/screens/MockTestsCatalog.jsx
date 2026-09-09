@@ -58,11 +58,13 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-[#7F58FA] text-xs font-bold border border-purple-100 mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>GSSS 52 LNP (MANJHUWAS) &bull; {isHi ? 'कक्षा 6 से 12' : 'Classes 6 to 12'}</span>
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-purple-50 text-[#7F58FA] text-xs font-bold border border-purple-100 mb-2">
+              <img src="./rajasthan-education-logo.png" alt="Emblem" className="w-4 h-4 object-contain" />
+              <span>GSSS 52 LNP (MANJHUWAS) &bull; {isHi ? 'परीक्षा पोर्टल • कक्षा 6 से 12' : 'Pariksha Portal • Classes 6 to 12'}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{t.catalogTitle}</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+              {isHi ? 'परीक्षा - एनसीईआरटी मॉक टेस्ट' : 'Pariksha - NCERT Mock Tests'}
+            </h1>
             <p className="text-xs sm:text-sm text-gray-500">{t.catalogSubtitle}</p>
           </div>
         </header>

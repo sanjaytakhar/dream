@@ -85,17 +85,19 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
   return (
     <div className="min-h-screen bg-[#FDFAFF] flex flex-col select-none">
       {/* CBT Header */}
-      <header className="bg-white border-b border-[#E5E7EB] px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm sticky top-[41px] z-30">
+      <header className="bg-white border-b border-[#E5E7EB] px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm sticky top-0 z-30">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#7F58FA]/10 text-[#7F58FA] flex items-center justify-center font-bold text-sm">
-            🏫
-          </div>
+          <img
+            src="./rajasthan-education-logo.png"
+            alt="सतत् एवं व्यापक शिक्षा"
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-sm shrink-0"
+          />
           <div>
             <h1 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
-              GSSS 52 LNP (MANJHUWAS) &bull; {testInfo ? (isHi ? testInfo.titleHi || testInfo.title : testInfo.title) : (isHi ? 'कक्षा 10 बोर्ड मॉक परीक्षा' : 'Class 10 Board Mock Examination')}
+              परीक्षा &bull; GSSS 52 LNP (MANJHUWAS) &bull; {testInfo ? (isHi ? testInfo.titleHi || testInfo.title : testInfo.title) : (isHi ? 'कक्षा 10 बोर्ड मॉक परीक्षा' : 'Class 10 Board Mock Examination')}
             </h1>
             <p className="text-[11px] text-gray-500">
-              {isHi ? 'डिजिटल कंप्यूटर लैब परीक्षा प्रणाली' : 'Digital Assessment Lab System'}
+              {isHi ? 'डिजिटल कंप्यूटर लैब परीक्षा प्रणाली • राजस्थान सरकार' : 'Digital Assessment Lab System • Govt. of Rajasthan'}
             </p>
           </div>
         </div>

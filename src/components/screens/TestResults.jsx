@@ -84,11 +84,20 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
     <div className="min-h-screen bg-[#FDFAFF] text-[#1F2937]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">{t.resultsTitle}</h1>
-            <p className="text-xs sm:text-sm text-gray-500">
-              GSSS 52 LNP (MANJHUWAS) &bull; {activeTestInfo ? (isHi ? activeTestInfo.titleHi || activeTestInfo.title : activeTestInfo.title) : (isHi ? 'मूल्यांकन रिपोर्ट' : 'Assessment Report Card')}
-            </p>
+          <div className="flex items-center gap-3.5">
+            <img
+              src="./rajasthan-education-logo.png"
+              alt="सतत् एवं व्यापक शिक्षा"
+              className="w-12 h-12 object-contain drop-shadow-sm shrink-0"
+            />
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                {isHi ? 'परीक्षा अंक तालिका' : 'Pariksha Report Card'}
+              </h1>
+              <p className="text-xs sm:text-sm text-gray-500">
+                GSSS 52 LNP (MANJHUWAS) &bull; {activeTestInfo ? (isHi ? activeTestInfo.titleHi || activeTestInfo.title : activeTestInfo.title) : (isHi ? 'मूल्यांकन रिपोर्ट' : 'Assessment Report Card')}
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">

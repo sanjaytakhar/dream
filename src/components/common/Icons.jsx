@@ -1,15 +1,14 @@
 import React from 'react';
 
-export const Logo = ({ className = "w-8 h-8", textClassName = "text-xl font-bold text-gray-900" }) => (
+export const Logo = ({ className = "w-9 h-9", textClassName = "text-xl font-bold text-gray-900" }) => (
   <div className="flex items-center gap-2.5 select-none cursor-pointer">
-    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7F58FA] to-[#6042DF] flex items-center justify-center text-white shadow-md shadow-[#7F58FA]/20">
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-      </svg>
-    </div>
+    <img
+      src="./rajasthan-education-logo.png"
+      alt="सतत् एवं व्यापक शिक्षा"
+      className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-sm shrink-0"
+    />
     <span className={`tracking-tight font-extrabold ${textClassName}`}>
-      Exam<span className="text-[#7F58FA]">Wave</span>
+      परी<span className="text-[#7F58FA]">क्षा</span>
     </span>
   </div>
 );
