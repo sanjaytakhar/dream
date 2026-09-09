@@ -29,6 +29,7 @@ export const class6MathsTest1Questions = [
         "textHi": "शून्य सभी धनात्मक संख्याओं से बड़ा है"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "एनसीईआरटी अध्याय 10: \"शून्य (0) न तो धनात्मक संख्या है और न ही ऋणात्मक संख्या। हम 0 के आगे + या - चिह्न नहीं लगाते हैं।\""
   },
@@ -59,6 +60,7 @@ export const class6MathsTest1Questions = [
         "textHi": "+10"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "भूतल प्रारंभिक संदर्भ बिंदु (reference point) है, इसलिए इसे तल 0 (शून्य तल) कहा जाता है।"
   },
@@ -89,6 +91,7 @@ export const class6MathsTest1Questions = [
         "textHi": "0 (भूतल)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "'+' बटन दबाना ऊपर जाने की धनात्मक गति को दर्शाता है। 0 से 3 तल ऊपर जाने पर तल +3 प्राप्त होता है।"
   },
@@ -119,6 +122,7 @@ export const class6MathsTest1Questions = [
         "textHi": "0"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "भूतल (0) से नीचे जाने के लिए '-' बटन दबाया जाता है। 2 तल नीचे का क्रमांक -2 होगा।"
   },
@@ -149,6 +153,7 @@ export const class6MathsTest1Questions = [
         "textHi": "वही संख्या"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "प्रत्येक दी गई संख्या के साथ एक ऐसी संख्या होती है जिसे उसमें जोड़ने पर शून्य (0) प्राप्त होता है। जैसे (+3) + (-3) = 0।"
   },
@@ -179,6 +184,7 @@ export const class6MathsTest1Questions = [
         "textHi": "1"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "ऋणात्मक संख्या का योज्य प्रतिलोम उसकी संगत धनात्मक संख्या होती है। (-543) + (+543) = 0, अतः उत्तर 543 है।"
   },
@@ -209,6 +215,7 @@ export const class6MathsTest1Questions = [
         "textHi": "अपरिभाषित"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "चूंकि 0 + 0 = 0 होता है, इसलिए शून्य का योज्य प्रतिलोम स्वयं 0 ही होता है।"
   },
@@ -239,6 +246,7 @@ export const class6MathsTest1Questions = [
         "textHi": "-3 < -4"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "संख्या रेखा पर जो संख्या बाईं ओर स्थित होती है, वह छोटी होती है। -4, -3 के बाईं ओर है, इसलिए -4 < -3 (या -3 > -4)।"
   },
@@ -269,6 +277,7 @@ export const class6MathsTest1Questions = [
         "textHi": "<="
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "सभी ऋणात्मक संख्याएँ 0 से छोटी होती हैं, इसलिए शून्य प्रत्येक ऋणात्मक संख्या से बड़ा होता है (0 > -20)।"
   },
@@ -299,6 +308,7 @@ export const class6MathsTest1Questions = [
         "textHi": "+5"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "ऋणात्मक दिशा में शून्य से जितनी अधिक दूरी पर जाएंगे, संख्या उतनी ही छोटी होती जाती है। अतः -25 सबसे छोटा पूर्णांक है।"
   },
@@ -329,6 +339,7 @@ export const class6MathsTest1Questions = [
         "textHi": "बाईं ओर 5 कदम"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "आवश्यक गति = लक्षित संख्या - प्रारंभिक संख्या = 9 - 5 = +4 (अर्थात् दाईं/आगे की दिशा में 4 कदम)।"
   },
@@ -359,6 +370,7 @@ export const class6MathsTest1Questions = [
         "textHi": "-9 + 6 = -3"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "प्रारंभिक संख्या + गति = लक्षित संख्या: 9 + (-6) = 3। इसका घटाव कथन 3 - 9 = -6 होता है।"
   },
@@ -389,6 +401,7 @@ export const class6MathsTest1Questions = [
         "textHi": "केवल भिन्न एवं दशमलव"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "शून्य सहित सभी धनात्मक और ऋणात्मक पूर्ण संख्याओं को पूर्णांक कहा जाता है: ... -3, -2, -1, 0, +1, +2, +3 ...।"
   },
@@ -419,6 +432,7 @@ export const class6MathsTest1Questions = [
         "textHi": "+3 (3 तल ऊपर)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "लक्षित तल - प्रारंभिक तल = आवश्यक गति: (-5) - (+2) = -7। अतः -7 दबाना होगा (7 तल नीचे)।"
   },
@@ -449,6 +463,7 @@ export const class6MathsTest1Questions = [
         "textHi": "0, 1, 2, 3"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "-4 और 4 के बीच के पूर्णांक -3, -2, -1, 0, 1, 2, 3 हैं, जो बाएं से दाएं बढ़ते क्रम में हैं।"
   }
@@ -482,6 +497,7 @@ export const class6MathsTest2Questions = [
         "textHi": "सफेद = धनात्मक (+), काला = ऋणात्मक (-)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "एनसीईआरटी अध्याय 10.2 के अनुसार धनात्मक बटन के लिए हरा टोकन (+) तथा ऋणात्मक बटन के लिए लाल टोकन (-) प्रयुक्त होता है।"
   },
@@ -512,6 +528,7 @@ export const class6MathsTest2Questions = [
         "textHi": "एक खाली डिब्बा"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "एक धनात्मक (+1) और एक ऋणात्मक (-1) टोकन मिलकर एक-दूसरे को निरस्त (रद्द) कर देते हैं और उनका मान 0 हो जाता है।"
   },
@@ -542,6 +559,7 @@ export const class6MathsTest2Questions = [
         "textHi": "0"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "(+5) + (-8) = 5 शून्य जोड़े + (-3) = -3 (3 लाल टोकन शेष बचेंगे)।"
   },
@@ -572,6 +590,7 @@ export const class6MathsTest2Questions = [
         "textHi": "(-7) - (-5)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "घटाने वाली संख्या (+5) को उसके योज्य प्रतिलोम (-5) में बदलकर जोड़ा जाता है: (+7) - (+5) = (+7) + (-5) = +2।"
   },
@@ -602,6 +621,7 @@ export const class6MathsTest2Questions = [
         "textHi": "-10"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "ऋणात्मक संख्या (-2) को घटाना उसके योज्य प्रतिलोम (+2) को जोड़ने के समान है: (+8) - (-2) = 8 + 2 = +10।"
   },
@@ -632,6 +652,7 @@ export const class6MathsTest2Questions = [
         "textHi": "10 शून्य जोड़े"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "4 हरे टोकन में से 6 लाल टोकन निकालने के लिए 6 शून्य जोड़े (6 हरे + 6 लाल) जोड़े जाते हैं। 6 लाल हटाने पर 4 + 6 = 10 हरे टोकन बचते हैं (+10)।"
   },
@@ -662,6 +683,7 @@ export const class6MathsTest2Questions = [
         "textHi": "+95"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "दो ऋणात्मक संख्याओं का योग ऋणात्मक होता है: -(125 + 30) = -155।"
   },
@@ -692,6 +714,7 @@ export const class6MathsTest2Questions = [
         "textHi": "-299"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "विपरीत चिन्ह होने पर बड़ी संख्या में से छोटी संख्या घटाई जाती है (200 - 99 = 101) तथा बड़ी संख्या का चिन्ह (+) लगाया जाता है।"
   },
@@ -722,6 +745,7 @@ export const class6MathsTest2Questions = [
         "textHi": "+7"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "(-4) - (-3) = (-4) + (+3) = -1।"
   },
@@ -752,6 +776,7 @@ export const class6MathsTest2Questions = [
         "textHi": "1"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "शून्य में से किसी संख्या को घटाने पर उसका योज्य प्रतिलोम प्राप्त होता है: 0 - (-2) = 0 + 2 = +2।"
   },
@@ -782,6 +807,7 @@ export const class6MathsTest2Questions = [
         "textHi": "-10 m"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "कुल दूरी = (+40) - (-50) = 40 + 50 = 90 मीटर।"
   },
@@ -812,6 +838,7 @@ export const class6MathsTest2Questions = [
         "textHi": "-145"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "85 से बाईं ओर 60 कदम चलने पर: 85 - 60 = +25 प्राप्त होता है।"
   },
@@ -842,6 +869,7 @@ export const class6MathsTest2Questions = [
         "textHi": "+21"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "(-8) - (-13) = (-8) + 13 = 13 - 8 = +5।"
   },
@@ -872,6 +900,7 @@ export const class6MathsTest2Questions = [
         "textHi": "-14"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "प्रत्येक पद में +6 जोड़ा जा रहा है: -40 + 6 = -34; -34 + 6 = -28; -28 + 6 = -22; -22 + 6 = -16।"
   },
@@ -902,6 +931,7 @@ export const class6MathsTest2Questions = [
         "textHi": "+1500"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "+1500 - (-1500) = 1500 + 1500 = +3000।"
   }
@@ -935,6 +965,7 @@ export const class6MathsTest3Questions = [
         "textHi": "दोनों सदैव ऋणात्मक होते हैं"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "बैंक खाते में राशि जमा होना वृद्धि (+) तथा राशि निकालना या बिल भुगतान करना कमी (-) को दर्शाता है।"
   },
@@ -965,6 +996,7 @@ export const class6MathsTest3Questions = [
         "textHi": "-₹20"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "कुल जमा = 30 + 40 + 50 = +₹120। कुल निकासी = -(40 + 50 + 60) = -₹150। शेष = 120 - 150 = -₹30।"
   },
@@ -995,6 +1027,7 @@ export const class6MathsTest3Questions = [
         "textHi": "1000 मीटर"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "समुद्र तल को संदर्भ स्तर (0 मीटर) माना जाता है। इससे ऊपर की ऊँचाई धनात्मक (+) तथा नीचे की गहराई ऋणात्मक (-) होती है।"
   },
@@ -1025,6 +1058,7 @@ export const class6MathsTest3Questions = [
         "textHi": "-10°C, हिमांक"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "शुद्ध जल 0°C पर जमता है। जब तापमान पानी के हिमांक से नीचे जाता है, तो उसे ऋणात्मक पूर्णांकों (उदा. -2°C, -4°C) से दर्शाते हैं।"
   },
@@ -1055,6 +1089,7 @@ export const class6MathsTest3Questions = [
         "textHi": "0°C अधिक ठंडा है"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "-4 < -2, संख्या रेखा पर -4 शून्य से अधिक बाईं ओर है, अतः -4°C पर अधिक तीव्र ठंड होगी।"
   },
@@ -1085,6 +1120,7 @@ export const class6MathsTest3Questions = [
         "textHi": "कुल योग"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "एनसीईआरटी अध्याय 10.4 के अनुसार चारों बाहरी किनारों (पंक्तियों व स्तंभों) के समान योग को 'सीमा योग' (Boundary Sum) कहा जाता है।"
   },
@@ -1115,6 +1151,7 @@ export const class6MathsTest3Questions = [
         "textHi": "ब्याज की गणना नहीं होती"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "कौटिल्य के अर्थशास्त्र में जमा (credit) व निकासी (debit) की विस्तृत व्यवस्था थी और यह मान्यता सम्मिलित थी कि खाता शेष ऋणात्मक हो सकता है।"
   },
@@ -1145,6 +1182,7 @@ export const class6MathsTest3Questions = [
         "textHi": "कोष्ठक में लिखकर"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "बक्शाली पांडुलिपि में ऋणात्मक संख्या को दर्शाने के लिए एक विशेष प्रतीक चिह्न को संख्या के पश्चात रखा जाता था (न कि संख्या से पहले)।"
   },
@@ -1175,6 +1213,7 @@ export const class6MathsTest3Questions = [
         "textHi": "वराहमिहिर"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ब्रह्मगुप्त पहले गणितज्ञ थे जिन्होंने शून्य को धनात्मक एवं ऋणात्मक संख्याओं के समान महत्व दिया और इनके अंकगणितीय नियम प्रतिपादित किए।"
   },
@@ -1205,6 +1244,7 @@ export const class6MathsTest3Questions = [
         "textHi": "धनात्मक या ऋणात्मक कुछ भी"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ब्रह्मगुप्त: \"दो ऋणात्मक संख्याओं का योग ऋणात्मक होता है।\" जैसे (-2) + (-3) = -5।"
   },
@@ -1235,6 +1275,7 @@ export const class6MathsTest3Questions = [
         "textHi": "वही संख्या"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ब्रह्मगुप्त नियम: \"एक संख्या को स्वयं में से घटाना शून्य प्रदान करता है (2 - 2 = 0 तथा -2 - (-2) = 0)।\""
   },
@@ -1265,6 +1306,7 @@ export const class6MathsTest3Questions = [
         "textHi": "पाइथागोरस"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "एनसीईआरटी: \"18वीं शताब्दी में एक फ्रांसीसी गणितज्ञ लाझारे कार्नोट ने ऋणात्मक संख्याओं को 'बेतुका' कहा था, जबकि भारत में ब्रह्मगुप्त ने 628 ईस्वी में ही इन्हें पूर्णतः स्पष्ट कर दिया था।\""
   },
@@ -1295,6 +1337,7 @@ export const class6MathsTest3Questions = [
         "textHi": "+50"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "दोनों खिलाड़ी 0 से खेलना प्रारंभ करते हैं। पासे फेंककर +50 (धनात्मक छोर) या -50 (ऋणात्मक छोर) तक पहुँचने का प्रयास करते हैं।"
   },
@@ -1325,6 +1368,7 @@ export const class6MathsTest3Questions = [
         "textHi": "320 ईसा पूर्व"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ईसा पूर्व वर्षों को ऋणात्मक मान सकते हैं: -680 + 320 = -360, अतः वह वर्ष 360 ईसा पूर्व (360 BCE) होगा।"
   },
@@ -1355,6 +1399,7 @@ export const class6MathsTest3Questions = [
         "textHi": "भिन्न"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ब्रह्मगुप्त नियम: \"एक छोटे धनात्मक में से एक बड़ा धनात्मक घटाया जाए तो परिणाम ऋणात्मक होता है (2 - 3 = -1)।\""
   }

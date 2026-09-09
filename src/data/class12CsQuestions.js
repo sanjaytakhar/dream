@@ -29,6 +29,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "Type Error (प्रारूप त्रुटि)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "Syntax Error (SyntaxError) तब उत्पन्न होता है जब पायथन पार्सर कोड में व्याकरण/सिंटैक्स संबंधी त्रुटि पाता है। (When syntax rules of Python are violated, SyntaxError is raised)."
   },
@@ -59,6 +60,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "catch"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "पायथन में किसी अपवाद को जबरन उठाने (throw/raise) के लिए \"raise\" कीवर्ड का उपयोग किया जाता है। (In Python, the \"raise\" keyword is used to trigger an exception manually)."
   },
@@ -89,6 +91,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "read()"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "पायथन में फाइल ऑब्जेक्ट बनाने और फाइल को पढ़ने या लिखने के लिए open() फंक्शन का प्रयोग किया जाता है। (The open() function opens a file and returns a corresponding file object)."
   },
@@ -119,6 +122,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "< r >"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "मोड \"< r >\" डिफ़ॉल्ट रूप से टेक्स्ट फाइल को केवल पढ़ने (read-only) हेतु खोलता है। (The < r > mode opens a text file for reading only; file pointer is at the beginning)."
   },
@@ -149,6 +153,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "DELETE"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "स्टैक में शीर्ष (Top) पर नया तत्व जोड़ना PUSH कहलाता है तथा तत्व को हटाना POP कहलाता है। (PUSH operation inserts an element onto the top of the stack)."
   },
@@ -179,6 +184,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "उपरोक्त सभी"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "Infix नोटेशन में ऑपरेटर दो ऑपरेंड्स के बीच में होता है जैसे A + B। Prefix में ऑपरेटर पहले (+ A B) और Postfix में बाद में (A B +) आता है।"
   },
@@ -209,6 +215,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "रैंडम एक्सेस"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "कतार (Queue) FIFO (First-In, First-Out) सिद्धांत पर कार्य करती है, जिसमें पहले प्रविष्ट हुआ तत्व सबसे पहले बाहर आता है।"
   },
@@ -239,6 +246,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "फ़िल्टरिंग (Filtering)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "सॉर्टिंग (Sorting) डेटा तत्वों को किसी विशिष्ट क्रम (बढ़ते या घटते) में व्यवस्थित करने की तकनीक है।"
   },
@@ -269,6 +277,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "हैशिंग"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "बाइनरी सर्च (Binary Search) केवल सॉर्टेड सूची पर कार्य करती है और मध्य तत्व (middle element) से तुलना करके सूची को आधा करती जाती है (O(log n))।"
   },
@@ -299,6 +308,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "कुंजी (Key)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "जब हैश फंक्शन दो अलग-अलग कुंजियों (keys) के लिए समान स्लॉट/इंडेक्स देता है, तो इसे हैश कोलिज़न (Collision) कहते हैं।"
   },
@@ -329,6 +339,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "बहुलक (Mode)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "बहुलक (Mode) वह मान है जिसकी आवृत्ति (frequency) डेटा सेट में सर्वाधिक होती है।"
   },
@@ -359,6 +370,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "डेटाबेस इंस्टेंस"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "डेटाबेस स्कीमा (Schema) डेटाबेस का सम्पूर्ण खाका/ब्लूप्रिंट होता है जो तालिकाओं, फील्ड्स और संबंधों को परिभाषित करता है।"
   },
@@ -389,6 +401,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "कम्पोजिट की"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "फॉरेन की (Foreign Key) एक तालिका का वह कॉलम होता है जो दूसरी तालिका की प्राइमरी की को संदर्भित (reference) कर संबंध बनाता है।"
   },
@@ -419,6 +432,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "CHECK"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "UNIQUE कंस्ट्रेंट यह सुनिश्चित करता है कि कॉलम में कोई भी दो रिकॉर्ड्स समान मान न रखें (प्रत्येक मान अद्वितीय हो)।"
   },
@@ -449,6 +463,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "LOWER()"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "SQL में LENGTH() फंक्शन किसी स्ट्रिंग में मौजूद कुल अक्षरों की संख्या की गणना करता है (जैसे LENGTH(\"OUTLINE\") = 7)।"
   },
@@ -479,6 +494,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "HUB (हब)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "LAN, MAN और WAN नेटवर्क के प्रकार हैं, जबकि HUB (हब) एक हार्डवेयर नेटवर्किंग उपकरण (Network Device) है।"
   },
@@ -509,6 +525,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "सिंपल मेल ट्रांसफर प्रोटोकॉल (SMTP)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "HTTP (Hypertext Transfer Protocol) वेब ब्राउज़र और वेब सर्वर के बीच संचार स्थापित करने वाला मुख्य प्रोटोकॉल है।"
   },
@@ -539,6 +556,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "Producer (उत्पादक)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "हैकर (Hacker) वह तकनीकी रूप से कुशल व्यक्ति होता है जो कंप्यूटर सुरक्षा प्रणालियों की कमियों का पता लगाकर सिस्टम में प्रवेश करता है।"
   },
@@ -569,6 +587,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "\"OUTLINE\""
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "\"OUTLINE\" शब्द में O-U-T-L-I-N-E कुल 7 अक्षर हैं, अतः LENGTH() का मान 7 प्राप्त होगा।"
   },
@@ -599,6 +618,7 @@ export const class12CsBoard2025Questions = [
         "textHi": "1"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "MOD(90, 9) 90 को 9 से भाग देने पर शेषफल (remainder) ज्ञात करता है। चूंकि 90 = 9 × 10 + 0, शेषफल 0 प्राप्त होगा।"
   }
@@ -632,6 +652,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "< a+ >"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "< r+ > मोड फाइल को पढ़ने और लिखने दोनों के लिए खोलता है और फाइल पॉइंटर फाइल के आरम्भ में स्थित रहता है।"
   },
@@ -662,6 +683,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "फर्स्ट इन फर्स्ट आउट (First In First Out)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "FIFO का अर्थ \"First In First Out\" है, जिसका अर्थ है कि कतार में जो डेटा सबसे पहले डाला जाता है, वह सबसे पहले निकाला जाता है।"
   },
@@ -692,6 +714,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "इनमें से कोई नहीं"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "बाइनरी सर्च हमेशा सॉर्टेड एरे पर काम करती है तथा मध्य (mid) तत्व निकालकर सूची को विभाजित करती है।"
   },
@@ -722,6 +745,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "रॉ स्ट्रीम"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "संरचित डेटा (Structured Data) वह डेटा है जो पूर्व-निर्धारित स्कीमा और पंक्तियों-स्तम्भों (rows and columns) में व्यवस्थित रहता है।"
   },
@@ -752,6 +776,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "कैंडिडेट की (Candidate Key)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "डेटाबेस में Primary Key, Foreign Key, Candidate Key तथा Alternate Key होती हैं। \"Agree Key\" कोई डेटाबेस की नहीं है।"
   },
@@ -782,6 +807,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "स्ट्रक्चर्ड क्वेरी लैंग्वेज (Structured Query Language)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "SQL का पूरा नाम Structured Query Language है, जो रिलेशनल डेटाबेस को मैनेज एवं क्वेरी करने की मानक भाषा है।"
   },
@@ -812,6 +838,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "ग्रे हैट्स (Grey Hats)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "White Hat (एथिकल), Black Hat (दुर्भावनापूर्ण) और Grey Hat हैकर्स के प्रकार हैं। Firewall एक सुरक्षा प्रणाली/सॉफ्टवेयर है।"
   },
@@ -842,6 +869,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "पुनरावर्तक (Repeater)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "MODEM शब्द MOdulator और DEModulator का संक्षिप्त रूप है जो एनालॉग और डिजिटल सिग्नलों का परस्पर रूपांतरण करता है।"
   },
@@ -872,6 +900,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "dump()"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "file.writelines(lines) मेथड स्ट्रिंग्स की किसी सूची को फाइल में लिखता है।"
   },
@@ -902,6 +931,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "वर्ल्ड एरिया नोड"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "WAN (Wide Area Network) विस्तृत भौगोलिक दूरी (देश, महाद्वीप या विश्व) में फैले नेटवर्क को कहते हैं (उदा. इंटरनेट)।"
   },
@@ -932,6 +962,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "ऑपरेटिंग सिस्टम बंद करता है"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "assert expression, [message] यह सुनिश्चित करता है कि दी गई शर्त सत्य है; यदि शर्त असत्य हो तो AssertionError रेज़ होता है।"
   },
@@ -962,6 +993,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "CHANGE DATA"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "ALTER TABLE कमांड एक DDL कमांड है जिसका उपयोग टेबल में नया कॉलम जोड़ने, हटाने या डेटा टाइप बदलने के लिए होता है।"
   },
@@ -992,6 +1024,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "केवल फाइल खोलते समय"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "finally ब्लॉक अनिवार्य रूप से हर परिस्थिति में चलता है (उदा. खुली फाइलें बंद करना या कनेक्शन क्लोज़ करना)।"
   },
@@ -1022,6 +1055,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "STRUCT table_name;"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "DESC table_name; या DESCRIBE table_name; टेबल के सभी कॉलम, डेटा टाइप, Nullability व Keys की जानकारी दिखाता है।"
   },
@@ -1052,6 +1086,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "सैटेलाइट नेटवर्क"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ब्लूटूथ एक कम दूरी (लगभग 10 मीटर) की 2.4 GHz रेडियो फ्रीक्वेंसी तकनीक है जो PAN (Personal Area Network) बनाती है।"
   },
@@ -1082,6 +1117,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "कुल पंक्तियों की संख्या"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "readline() फाइल पॉइंटर की वर्तमान स्थिति से अगली न्यूलाइन वर्ण तक की एक पंक्ति स्ट्रिंग के रूप में पढ़ता है।"
   },
@@ -1112,6 +1148,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "A B + - C D *"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "ऑपरेटर प्राथमिकता अनुसार: पहले * हल होगा: (C * D) -> CD*। फिर बाएं से दाएं + और -: ((A + B) - (CD*)) -> (AB+) - (CD*) -> A B + C D * -।"
   },
@@ -1142,6 +1179,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "कुंजियों को बकेट में हैश करता है"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "Selection Sort प्रत्येक पास में अवर्गीकृत सब-एरे में से सबसे छोटा (minimum) तत्व खोजता है और उसे सही स्थान पर स्वैप करता है।"
   },
@@ -1172,6 +1210,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "फाइल की अनुमतियाँ"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "file.tell() फाइल के आरंभ से लेकर फाइल कर्सर की वर्तमान स्थिति (बाइट्स में) एक पूर्णांक के रूप में लौटाता है।"
   },
@@ -1202,6 +1241,7 @@ export const class12CsBoard2023Questions = [
         "textHi": "jump(offset)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "seek(offset, whence) का उपयोग फाइल पॉइंटर को आगे या पीछे किसी निश्चित बाइट ऑफसेट पर स्थानांतरित करने के लिए होता है।"
   }
@@ -1235,6 +1275,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "किसी भी स्थान से"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "क्यू (Queue) में नया तत्व REAR (पीछे) से प्रविष्ट होता है और तत्व का निष्कासन (Deletion) हमेशा FRONT (आगे) से होता है।"
   },
@@ -1265,6 +1306,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "NameError (नाम त्रुटि)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "ImportError तब उत्पन्न होता है जब import कथन किसी मॉड्यूल को ढूंढने या लोड करने में असमर्थ होता है।"
   },
@@ -1295,6 +1337,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "बहुलक (Mode)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "माध्य (Mean) सभी अवलोकनों के योग को कुल अवलोकनों की संख्या से भाग देकर प्राप्त औसत मान है।"
   },
@@ -1325,6 +1368,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "< rb >"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "< rb > मोड बाइनरी फाइल (जैसे इमेज, ऑब्जेक्ट, पिकल फाइल) को केवल पढ़ने हेतु सुरक्षित रूप से खोलता है।"
   },
@@ -1355,6 +1399,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "1990"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "सर टिम बर्नर्स-ली ने 1989 में सर्न (CERN) में वर्ल्ड वाइड वेब का आविष्कार किया था।"
   },
@@ -1385,6 +1430,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "ट्री (Tree)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "Stack, Queue और Tree डेटा संरचनाएं हैं, जबकि Push स्टैक पर नया तत्व जोड़ने वाला एक ऑपरेशन है।"
   },
@@ -1415,6 +1461,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "मल्टीप्लेक्स"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "सिम्प्लेक्स (Simplex) मोड में संचार केवल एक ही दिशा में होता है (जैसे कीबोर्ड से कंप्यूटर या टीवी ब्रॉडकास्ट)।"
   },
@@ -1445,6 +1492,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "AUTO_INCREMENT"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "UNIQUE कंस्ट्रेंट स्तम्भ में डुप्लीकेट मान दर्ज होने से रोकता है।"
   },
@@ -1475,6 +1523,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "कार्डिनैलिटी (Cardinality)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "तालिका की पंक्ति को Tuple, स्तम्भ को Attribute, पंक्तियों की संख्या को Cardinality तथा स्तम्भों की संख्या को Degree कहते हैं।"
   },
@@ -1505,6 +1554,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "डेटा डेसीमल लैंग्वेज"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "DDL (Data Definition Language) में CREATE, ALTER, DROP आदि कमांड्स आते हैं जो डेटाबेस संरचना का निर्माण एवं संशोधन करते हैं।"
   },
@@ -1535,6 +1585,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "Base (बेस)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "क्यू के सिर (Head) को Front तथा पूंछ (Tail) को Rear कहा जाता है, जहाँ नए तत्व जुड़ते हैं।"
   },
@@ -1565,6 +1616,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "FOREIGN KEY"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "PRIMARY KEY किसी तालिका के प्रत्येक रिकॉर्ड की विशिष्ट पहचान करती है और इसमें NULL मान स्वीकार्य नहीं होते।"
   },
@@ -1595,6 +1647,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "किसी भी स्थान"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "स्टैक LIFO (Last In First Out) संरचना है जहाँ प्रवेशन (Push) और विलोपन (Pop) दोनों केवल TOP से ही संभव हैं।"
   },
@@ -1625,6 +1678,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "डायनामिक एक्सपोर्ट क्यू"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "Deque (Double Ended Queue) वह कतार है जिसमें दोनों सिरों (Front और Rear) से प्रवेशन एवं विलोपन दोनों किए जा सकते हैं।"
   },
@@ -1655,6 +1709,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "सर्वर का भार"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "बैंडविड्थ (Bandwidth) एक निश्चित समय में किसी संचार चैनल द्वारा प्रेषित किए जा सकने वाले अधिकतम डेटा की मात्रा (bps/Hz) है।"
   },
@@ -1685,6 +1740,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "जब मेमोरी खाली हो जाए"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "Overflow: पूर्ण भरे स्टैक में पुश करना। Underflow: पूर्णतः खाली स्टैक में से पॉप करने का प्रयास करना।"
   },
@@ -1715,6 +1771,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "पुरानी लॉग फाइलें हटाना"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "डेटा रिडंडेंसी के कारण जब एक स्थान पर डेटा अपडेट होता है और दूसरे स्थान पर नहीं, तो डेटा असंगत (Inconsistent) हो जाता है।"
   },
@@ -1745,6 +1802,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "* A - B + C D"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "कोष्ठक अनुसार: (A - B) का प्रीफ़िक्स = -AB, (C + D) का प्रीफ़िक्स = +CD। अब दोनों के मध्य * लगाने पर: * [-AB] [+CD] = * - A B + C D।"
   },
@@ -1775,6 +1833,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "pickle.save(file)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "pickle.dump() पायथन ऑब्जेक्ट (डिक्शनरी, लिस्ट आदि) को बाइनरी फॉर्मेट में सीरियलाइज़ करके फाइल में राइट करता है।"
   },
@@ -1805,6 +1864,7 @@ export const class12CsBoard2022Questions = [
         "textHi": "pickle.unpack()"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "pickle.load() बाइनरी फाइल से डेटा को अनपिकल/डी-सीरियलाइज़ करके मूल पायथन ऑब्जेक्ट के रूप में लोड करता है।"
   }
@@ -1838,6 +1898,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "Type Error (प्रारूप त्रुटि)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "Syntax Error (SyntaxError) तब उत्पन्न होता है जब पायथन पार्सर कोड में व्याकरण/सिंटैक्स संबंधी त्रुटि पाता है। (When syntax rules of Python are violated, SyntaxError is raised)."
   },
@@ -1868,6 +1929,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "catch"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "पायथन में किसी अपवाद को जबरन उठाने (throw/raise) के लिए \"raise\" कीवर्ड का उपयोग किया जाता है। (In Python, the \"raise\" keyword is used to trigger an exception manually)."
   },
@@ -1898,6 +1960,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "read()"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "पायथन में फाइल ऑब्जेक्ट बनाने और फाइल को पढ़ने या लिखने के लिए open() फंक्शन का प्रयोग किया जाता है। (The open() function opens a file and returns a corresponding file object)."
   },
@@ -1928,6 +1991,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "< r >"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "मोड \"< r >\" डिफ़ॉल्ट रूप से टेक्स्ट फाइल को केवल पढ़ने (read-only) हेतु खोलता है। (The < r > mode opens a text file for reading only; file pointer is at the beginning)."
   },
@@ -1958,6 +2022,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "DELETE"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "स्टैक में शीर्ष (Top) पर नया तत्व जोड़ना PUSH कहलाता है तथा तत्व को हटाना POP कहलाता है। (PUSH operation inserts an element onto the top of the stack)."
   },
@@ -1988,6 +2053,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "उपरोक्त सभी"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "Infix नोटेशन में ऑपरेटर दो ऑपरेंड्स के बीच में होता है जैसे A + B। Prefix में ऑपरेटर पहले (+ A B) और Postfix में बाद में (A B +) आता है।"
   },
@@ -2018,6 +2084,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "रैंडम एक्सेस"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "कतार (Queue) FIFO (First-In, First-Out) सिद्धांत पर कार्य करती है, जिसमें पहले प्रविष्ट हुआ तत्व सबसे पहले बाहर आता है।"
   },
@@ -2048,6 +2115,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "फ़िल्टरिंग (Filtering)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "सॉर्टिंग (Sorting) डेटा तत्वों को किसी विशिष्ट क्रम (बढ़ते या घटते) में व्यवस्थित करने की तकनीक है।"
   },
@@ -2078,6 +2146,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "हैशिंग"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "बाइनरी सर्च (Binary Search) केवल सॉर्टेड सूची पर कार्य करती है और मध्य तत्व (middle element) से तुलना करके सूची को आधा करती जाती है (O(log n))।"
   },
@@ -2108,6 +2177,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "कुंजी (Key)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "जब हैश फंक्शन दो अलग-अलग कुंजियों (keys) के लिए समान स्लॉट/इंडेक्स देता है, तो इसे हैश कोलिज़न (Collision) कहते हैं।"
   },
@@ -2138,6 +2208,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "< a+ >"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "< r+ > मोड फाइल को पढ़ने और लिखने दोनों के लिए खोलता है और फाइल पॉइंटर फाइल के आरम्भ में स्थित रहता है।"
   },
@@ -2168,6 +2239,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "फर्स्ट इन फर्स्ट आउट (First In First Out)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "FIFO का अर्थ \"First In First Out\" है, जिसका अर्थ है कि कतार में जो डेटा सबसे पहले डाला जाता है, वह सबसे पहले निकाला जाता है।"
   },
@@ -2198,6 +2270,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "इनमें से कोई नहीं"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "बाइनरी सर्च हमेशा सॉर्टेड एरे पर काम करती है तथा मध्य (mid) तत्व निकालकर सूची को विभाजित करती है।"
   },
@@ -2228,6 +2301,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "रॉ स्ट्रीम"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "संरचित डेटा (Structured Data) वह डेटा है जो पूर्व-निर्धारित स्कीमा और पंक्तियों-स्तम्भों (rows and columns) में व्यवस्थित रहता है।"
   },
@@ -2258,6 +2332,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "कैंडिडेट की (Candidate Key)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "डेटाबेस में Primary Key, Foreign Key, Candidate Key तथा Alternate Key होती हैं। \"Agree Key\" कोई डेटाबेस की नहीं है।"
   },
@@ -2288,6 +2363,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "स्ट्रक्चर्ड क्वेरी लैंग्वेज (Structured Query Language)"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "SQL का पूरा नाम Structured Query Language है, जो रिलेशनल डेटाबेस को मैनेज एवं क्वेरी करने की मानक भाषा है।"
   },
@@ -2318,6 +2394,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "ग्रे हैट्स (Grey Hats)"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "White Hat (एथिकल), Black Hat (दुर्भावनापूर्ण) और Grey Hat हैकर्स के प्रकार हैं। Firewall एक सुरक्षा प्रणाली/सॉफ्टवेयर है।"
   },
@@ -2348,6 +2425,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "पुनरावर्तक (Repeater)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "MODEM शब्द MOdulator और DEModulator का संक्षिप्त रूप है जो एनालॉग और डिजिटल सिग्नलों का परस्पर रूपांतरण करता है।"
   },
@@ -2378,6 +2456,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "dump()"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "file.writelines(lines) मेथड स्ट्रिंग्स की किसी सूची को फाइल में लिखता है।"
   },
@@ -2408,6 +2487,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "वर्ल्ड एरिया नोड"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "WAN (Wide Area Network) विस्तृत भौगोलिक दूरी (देश, महाद्वीप या विश्व) में फैले नेटवर्क को कहते हैं (उदा. इंटरनेट)।"
   },
@@ -2438,6 +2518,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "किसी भी स्थान से"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "क्यू (Queue) में नया तत्व REAR (पीछे) से प्रविष्ट होता है और तत्व का निष्कासन (Deletion) हमेशा FRONT (आगे) से होता है।"
   },
@@ -2468,6 +2549,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "NameError (नाम त्रुटि)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "ImportError तब उत्पन्न होता है जब import कथन किसी मॉड्यूल को ढूंढने या लोड करने में असमर्थ होता है।"
   },
@@ -2498,6 +2580,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "बहुलक (Mode)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "माध्य (Mean) सभी अवलोकनों के योग को कुल अवलोकनों की संख्या से भाग देकर प्राप्त औसत मान है।"
   },
@@ -2528,6 +2611,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "< rb >"
       }
     ],
+    "correctAnswer": "D",
     "correct": "D",
     "explanation": "< rb > मोड बाइनरी फाइल (जैसे इमेज, ऑब्जेक्ट, पिकल फाइल) को केवल पढ़ने हेतु सुरक्षित रूप से खोलता है।"
   },
@@ -2558,6 +2642,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "1990"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "सर टिम बर्नर्स-ली ने 1989 में सर्न (CERN) में वर्ल्ड वाइड वेब का आविष्कार किया था।"
   },
@@ -2588,6 +2673,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "ट्री (Tree)"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "Stack, Queue और Tree डेटा संरचनाएं हैं, जबकि Push स्टैक पर नया तत्व जोड़ने वाला एक ऑपरेशन है।"
   },
@@ -2618,6 +2704,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "मल्टीप्लेक्स"
       }
     ],
+    "correctAnswer": "B",
     "correct": "B",
     "explanation": "सिम्प्लेक्स (Simplex) मोड में संचार केवल एक ही दिशा में होता है (जैसे कीबोर्ड से कंप्यूटर या टीवी ब्रॉडकास्ट)।"
   },
@@ -2648,6 +2735,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "AUTO_INCREMENT"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "UNIQUE कंस्ट्रेंट स्तम्भ में डुप्लीकेट मान दर्ज होने से रोकता है।"
   },
@@ -2678,6 +2766,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "कार्डिनैलिटी (Cardinality)"
       }
     ],
+    "correctAnswer": "C",
     "correct": "C",
     "explanation": "तालिका की पंक्ति को Tuple, स्तम्भ को Attribute, पंक्तियों की संख्या को Cardinality तथा स्तम्भों की संख्या को Degree कहते हैं।"
   },
@@ -2708,6 +2797,7 @@ export const class12CsGrandMasterQuestions = [
         "textHi": "डेटा डेसीमल लैंग्वेज"
       }
     ],
+    "correctAnswer": "A",
     "correct": "A",
     "explanation": "DDL (Data Definition Language) में CREATE, ALTER, DROP आदि कमांड्स आते हैं जो डेटाबेस संरचना का निर्माण एवं संशोधन करते हैं।"
   }

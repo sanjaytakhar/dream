@@ -26,9 +26,10 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
     const qMarks = q.marks || 1;
     maxScore += qMarks;
     const ans = userAnswers[q.id];
+    const rightAnswer = q.correctAnswer || q.correct;
     if (!ans) {
       skippedCount++;
-    } else if (ans === q.correctAnswer) {
+    } else if (ans === rightAnswer) {
       correctCount++;
       totalScore += qMarks;
     } else {
@@ -42,11 +43,12 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
   const chaptersMap = {};
   activeQuestions.forEach((q) => {
     const chap = q.chapter || q.section || q.topic || 'General';
+    const rightAnswer = q.correctAnswer || q.correct;
     if (!chaptersMap[chap]) {
       chaptersMap[chap] = { total: 0, correct: 0 };
     }
     chaptersMap[chap].total++;
-    if (userAnswers[q.id] === q.correctAnswer) {
+    if (userAnswers[q.id] === rightAnswer) {
       chaptersMap[chap].correct++;
     }
   });
@@ -245,7 +247,8 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
                 <tbody className="divide-y divide-gray-50">
                   {activeQuestions.map((q, idx) => {
                     const ans = userAnswers[q.id];
-                    const isCorrect = ans === q.correctAnswer;
+                    const rightAnswer = q.correctAnswer || q.correct;
+                    const isCorrect = ans === rightAnswer;
                     const isSkipped = !ans;
 
                     return (
@@ -263,7 +266,7 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
                           )}
                         </td>
                         <td className="py-3.5 font-bold text-gray-800">
-                          Option {q.correctAnswer}
+                          Option {rightAnswer}
                         </td>
                         <td className="py-3.5">
                           {isCorrect ? (
@@ -330,7 +333,8 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
                 <div className="space-y-2">
                   <p className="font-bold text-gray-700">{isHi ? 'विकल्प:' : 'Options:'}</p>
                   {selectedSolutionQ.options.map((opt) => {
-                    const isRight = opt.id === selectedSolutionQ.correctAnswer;
+                    const rightAnswer = selectedSolutionQ.correctAnswer || selectedSolutionQ.correct;
+                    const isRight = opt.id === rightAnswer;
                     const wasChosen = userAnswers[selectedSolutionQ.id] === opt.id;
                     return (
                       <div
