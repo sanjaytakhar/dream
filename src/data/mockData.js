@@ -5,8 +5,8 @@ export const schoolClasses = [
   { id: 'class-8', grade: 'Class 8', label: 'Class 8', labelHi: 'कक्षा 8', category: 'Middle School', categoryHi: 'उच्च प्राथमिक', color: '#3B82F6', bg: '#EFF6FF', icon: '🔬', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
   { id: 'class-9', grade: 'Class 9', label: 'Class 9', labelHi: 'कक्षा 9', category: 'Secondary', categoryHi: 'माध्यमिक', color: '#EC4899', bg: '#FDF2F8', icon: '📘', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
   { id: 'class-10', grade: 'Class 10', label: 'Class 10 (Board)', labelHi: 'कक्षा 10 (बोर्ड)', category: 'Secondary', categoryHi: 'माध्यमिक बोर्ड', color: '#F59E0B', bg: '#FFFBEB', icon: '🎯', subjects: ['Mathematics', 'Science', 'Social Science', 'English', 'Hindi'] },
-  { id: 'class-11', grade: 'Class 11', label: 'Class 11', labelHi: 'कक्षा 11', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक', color: '#8B5CF6', bg: '#F5F3FF', icon: '⚛️', subjects: ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
-  { id: 'class-12', grade: 'Class 12', label: 'Class 12 (Board)', labelHi: 'कक्षा 12 (बोर्ड)', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक बोर्ड', color: '#10B981', bg: '#ECFDF5', icon: '🎓', subjects: ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
+  { id: 'class-11', grade: 'Class 11', label: 'Class 11', labelHi: 'कक्षा 11', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक', color: '#8B5CF6', bg: '#F5F3FF', icon: '💻', subjects: ['Computer Science', 'Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
+  { id: 'class-12', grade: 'Class 12', label: 'Class 12 (Board)', labelHi: 'कक्षा 12 (बोर्ड)', category: 'Senior Secondary', categoryHi: 'उच्च माध्यमिक बोर्ड', color: '#10B981', bg: '#ECFDF5', icon: '🎓', subjects: ['Computer Science', 'Physics', 'Chemistry', 'Mathematics', 'Biology', 'English', 'Hindi'] },
 ];
 
 export const popularExams = schoolClasses.map(c => ({
@@ -19,6 +19,23 @@ export const popularExams = schoolClasses.map(c => ({
 }));
 
 export const mockTests = [
+  {
+    id: 'c11-cs-python',
+    title: 'Class 11 - Computer Science (Python Chapters 5 to 10)',
+    titleHi: 'कक्षा 11 - कंप्यूटर साइंस (पायथन अध्याय 5 से 10 विशेष टेस्ट)',
+    schoolClass: 'Class 11',
+    subject: 'Computer Science',
+    subjectHi: 'कंप्यूटर साइंस (Python)',
+    difficulty: 'Medium',
+    testType: 'Full Chapter Test',
+    questionsCount: 40,
+    durationMins: 60,
+    totalMarks: 40,
+    attempts: 128,
+    rating: 4.9,
+    tags: ['Class 11', 'Computer Science', 'Python', 'NCERT'],
+    featured: true,
+  },
   {
     id: 'c10-maths-term1',
     title: 'Class 10 - Mathematics (Term 1 Board Mock)',
@@ -293,6 +310,16 @@ export const studentProfile = {
     { subject: 'English', subjectHi: 'अंग्रेज़ी', score: 85, color: '#93C5FD' }
   ],
   recommendedTests: [
+    {
+      id: 'c11-cs-python',
+      title: 'Class 11 - Computer Science',
+      titleHi: 'कक्षा 11 - कंप्यूटर साइंस',
+      subtitle: 'Python Chapters 5 to 10 (40 MCQs)',
+      subtitleHi: 'पायथन अध्याय 5 से 10 (40 वस्तुनिष्ठ प्रश्न)',
+      questions: 40,
+      duration: '60 mins',
+      color: '#7F58FA'
+    },
     {
       id: 'c10-maths-term1',
       title: 'Class 10 - Mathematics',

@@ -13,10 +13,15 @@ import { AdminDashboard } from './components/screens/AdminDashboard';
 import { QuestionCreator } from './components/screens/QuestionCreator';
 import { StudentProfile } from './components/screens/StudentProfile';
 
+import { mockTests, defaultQuestions } from './data/mockData';
+import { class11CsQuestions } from './data/class11CsQuestions';
+
 export function App() {
   const [currentScreen, setCurrentScreen] = useState('landing');
   const [lang, setLang] = useState('hi'); // Defaulting to Hindi or easily toggleable
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
+  const [activeTest, setActiveTest] = useState(mockTests[0]); // Default to Class 11 CS test
+  const [activeQuestions, setActiveQuestions] = useState(class11CsQuestions);
   const [examSummary, setExamSummary] = useState(null);
   const [customQuestions, setCustomQuestions] = useState([]);
 
@@ -24,7 +29,27 @@ export function App() {
     setLang((prev) => (prev === 'en' ? 'hi' : 'en'));
   };
 
-  const handleStartExam = () => {
+  const handleStartExam = (testOrId) => {
+    let test = null;
+    if (typeof testOrId === 'string') {
+      test = mockTests.find((t) => t.id === testOrId) || mockTests[0];
+    } else if (testOrId && typeof testOrId === 'object' && testOrId.id) {
+      test = testOrId;
+    } else {
+      test = mockTests[0];
+    }
+    setActiveTest(test);
+
+    if (
+      test.id === 'c11-cs-python' ||
+      test.subject === 'Computer Science' ||
+      (test.title && test.title.includes('Computer Science'))
+    ) {
+      setActiveQuestions(class11CsQuestions);
+    } else {
+      setActiveQuestions(defaultQuestions);
+    }
+
     setCurrentScreen('cbt');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -115,6 +140,8 @@ export function App() {
 
         {currentScreen === 'cbt' && (
           <ExamEngine
+            questions={activeQuestions}
+            testInfo={activeTest}
             onFinishExam={handleFinishExam}
             onExit={() => setCurrentScreen('catalog')}
             lang={lang}
@@ -124,6 +151,8 @@ export function App() {
         {currentScreen === 'results' && (
           <TestResults
             examSummary={examSummary}
+            questions={activeQuestions}
+            testInfo={activeTest}
             onNavigate={setCurrentScreen}
             lang={lang}
           />

@@ -3,16 +3,26 @@ import { BookmarkIcon, ClockIcon, PauseIcon, PlayIcon } from '../common/Icons';
 import { defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
-export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
+export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = 'en' }) => {
+  const activeQuestions = questions && questions.length > 0 ? questions : defaultQuestions;
+  const initialTime = testInfo?.durationMins ? testInfo.durationMins * 60 : (activeQuestions.length === 40 ? 3600 : 5400);
+
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState({});
   const [markedForReview, setMarkedForReview] = useState({});
-  const [timeLeft, setTimeLeft] = useState(5400); // 90 mins in seconds
+  const [timeLeft, setTimeLeft] = useState(initialTime);
   const [isPaused, setIsPaused] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
 
   const t = translations[lang] || translations.en;
   const isHi = lang === 'hi';
+
+  useEffect(() => {
+    setTimeLeft(initialTime);
+    setCurrentIdx(0);
+    setAnswers({});
+    setMarkedForReview({});
+  }, [testInfo, questions]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -29,7 +39,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
 
-  const currentQ = defaultQuestions[currentIdx];
+  const currentQ = activeQuestions[currentIdx] || activeQuestions[0];
 
   const handleSelectOption = (optId) => {
     setAnswers((prev) => ({ ...prev, [currentQ.id]: optId }));
@@ -43,7 +53,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
   };
 
   const handleSaveAndNext = () => {
-    if (currentIdx < defaultQuestions.length - 1) {
+    if (currentIdx < activeQuestions.length - 1) {
       setCurrentIdx(currentIdx + 1);
     }
   };
@@ -56,7 +66,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
 
   const answeredCount = Object.keys(answers).length;
   const reviewCount = Object.values(markedForReview).filter(Boolean).length;
-  const notAnsweredCount = defaultQuestions.length - answeredCount;
+  const notAnsweredCount = activeQuestions.length - answeredCount;
 
   const handleSubmitConfirmed = () => {
     setShowSubmitModal(false);
@@ -64,8 +74,10 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
       onFinishExam({
         answers,
         markedForReview,
-        timeTakenSecs: 5400 - timeLeft,
-        totalQuestions: defaultQuestions.length
+        timeTakenSecs: initialTime - timeLeft,
+        totalQuestions: activeQuestions.length,
+        questions: activeQuestions,
+        testInfo
       });
     }
   };
@@ -80,7 +92,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
           </div>
           <div>
             <h1 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
-              GSSS 52 LNP (MANJHUWAS) &bull; {isHi ? 'कक्षा 10 बोर्ड मॉक परीक्षा' : 'Class 10 Board Mock Examination'}
+              GSSS 52 LNP (MANJHUWAS) &bull; {testInfo ? (isHi ? testInfo.titleHi || testInfo.title : testInfo.title) : (isHi ? 'कक्षा 10 बोर्ड मॉक परीक्षा' : 'Class 10 Board Mock Examination')}
             </h1>
             <p className="text-[11px] text-gray-500">
               {isHi ? 'डिजिटल कंप्यूटर लैब परीक्षा प्रणाली' : 'Digital Assessment Lab System'}
@@ -122,20 +134,20 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
             <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
               <div>
                 <span className="text-xs font-bold text-[#7F58FA] uppercase tracking-wider">
-                  {isHi ? 'भाग अ - विज्ञान व गणित' : 'Section A'}
+                  {testInfo ? (isHi ? testInfo.subjectHi || testInfo.subject : testInfo.subject) : (isHi ? 'भाग अ - विज्ञान व गणित' : 'Section A')}
                 </span>
                 <h3 className="text-sm font-extrabold text-gray-800">
                   {isHi ? 'प्रश्न तालिका' : 'Question Palette'}
                 </h3>
               </div>
               <span className="text-xs bg-[#F3EFFF] text-[#7F58FA] font-bold px-2.5 py-1 rounded-full">
-                {defaultQuestions.length} {isHi ? 'प्रश्न' : 'Questions'}
+                {activeQuestions.length} {isHi ? 'प्रश्न' : 'Questions'}
               </span>
             </div>
 
             {/* Grid numbers */}
-            <div className="grid grid-cols-4 sm:grid-cols-5 gap-2.5">
-              {defaultQuestions.map((q, idx) => {
+            <div className="grid grid-cols-5 gap-2 max-h-[360px] overflow-y-auto pr-1">
+              {activeQuestions.map((q, idx) => {
                 const isCurrent = idx === currentIdx;
                 const isAnswered = !!answers[q.id];
                 const isMarked = !!markedForReview[q.id];
@@ -151,7 +163,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
                   <button
                     key={q.id}
                     onClick={() => setCurrentIdx(idx)}
-                    className={`h-10 rounded-xl text-xs font-bold transition-all flex items-center justify-center relative ${bgClass} ${
+                    className={`h-9 rounded-xl text-xs font-bold transition-all flex items-center justify-center relative ${bgClass} ${
                       isCurrent ? 'ring-2 ring-offset-1 ring-[#7F58FA] scale-105 font-extrabold' : ''
                     }`}
                   >
@@ -190,10 +202,10 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
             <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-6">
               <div>
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                  {currentQ.section} &bull; {currentQ.topic}
+                  {currentQ.chapter || currentQ.section || (isHi ? 'भाग अ' : 'Section A')} &bull; {currentQ.topic}
                 </span>
                 <h2 className="text-base sm:text-lg font-extrabold text-gray-900 mt-0.5">
-                  {t.question} {currentIdx + 1} {t.of} {defaultQuestions.length}
+                  {t.question} {currentIdx + 1} {t.of} {activeQuestions.length}
                 </h2>
               </div>
 
@@ -287,7 +299,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
                 onClick={handleSaveAndNext}
                 className="px-7 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95"
               >
-                {currentIdx === defaultQuestions.length - 1 ? (isHi ? 'समीक्षा करें' : 'Review & Submit') : `${t.saveAndNext} \u2192`}
+                {currentIdx === activeQuestions.length - 1 ? (isHi ? 'समीक्षा करें' : 'Review & Submit') : `${t.saveAndNext} \u2192`}
               </button>
             </div>
           </div>
@@ -304,7 +316,7 @@ export const ExamEngine = ({ onFinishExam, onExit, lang = 'en' }) => {
             <div className="bg-gray-50 rounded-2xl p-4 mb-6 space-y-2 text-xs">
               <div className="flex justify-between font-medium text-gray-600">
                 <span>{isHi ? 'कुल प्रश्न:' : 'Total Questions:'}</span>
-                <span className="font-bold text-gray-900">{defaultQuestions.length}</span>
+                <span className="font-bold text-gray-900">{activeQuestions.length}</span>
               </div>
               <div className="flex justify-between font-medium text-emerald-600">
                 <span>{isHi ? 'हल किए गए:' : 'Attempted:'}</span>

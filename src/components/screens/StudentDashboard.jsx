@@ -169,7 +169,7 @@ export const StudentDashboard = ({ onNavigate, onStartTest, lang = 'en' }) => {
                       </div>
 
                       <button
-                        onClick={onStartTest}
+                        onClick={() => onStartTest(test)}
                         className="mt-4 w-full py-2 bg-[#7F58FA] hover:bg-[#6C44E8] text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
                       >
                         {t.startTest}

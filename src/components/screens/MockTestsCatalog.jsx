@@ -107,6 +107,7 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
                 className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-gray-800 outline-none focus:border-[#7F58FA]"
               >
                 <option value="All">{isHi ? 'सभी विषय' : 'All Subjects'}</option>
+                <option value="Computer Science">{isHi ? 'कंप्यूटर साइंस (Python)' : 'Computer Science'}</option>
                 <option value="Mathematics">{isHi ? 'गणित' : 'Mathematics'}</option>
                 <option value="Science">{isHi ? 'विज्ञान' : 'Science'}</option>
                 <option value="Social Science">{isHi ? 'सामाजिक विज्ञान' : 'Social Science'}</option>
@@ -182,7 +183,7 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-[#F3EFFF] text-[#7F58FA] flex items-center justify-center font-bold text-lg shrink-0">
-                    {test.subject === 'Mathematics' ? '📐' : test.subject === 'Science' ? '🔬' : test.subject === 'Physics' ? '⚛️' : test.subject === 'Chemistry' ? '🧪' : test.subject === 'Social Science' ? '🌍' : '📘'}
+                    {test.subject === 'Computer Science' ? '💻' : test.subject === 'Mathematics' ? '📐' : test.subject === 'Science' ? '🔬' : test.subject === 'Physics' ? '⚛️' : test.subject === 'Chemistry' ? '🧪' : test.subject === 'Social Science' ? '🌍' : '📘'}
                   </div>
 
                   <div className="space-y-2">
@@ -235,7 +236,7 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
                   </div>
 
                   <button
-                    onClick={onStartTest}
+                    onClick={() => onStartTest(test)}
                     className="px-6 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0"
                   >
                     {t.startTest}

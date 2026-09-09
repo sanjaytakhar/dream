@@ -95,7 +95,7 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
                 {t.startFree}
               </button>
               <button
-                onClick={onStartTest}
+                onClick={() => onStartTest('c11-cs-python')}
                 className="px-7 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 {t.sampleTest}

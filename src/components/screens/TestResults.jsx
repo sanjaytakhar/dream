@@ -4,10 +4,14 @@ import { DownloadIcon } from '../common/Icons';
 import { defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
-export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
+export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang = 'en' }) => {
   const [activeTab, setActiveTab] = useState('Question Analysis');
+  const [selectedSolutionQ, setSelectedSolutionQ] = useState(null);
   const t = translations[lang] || translations.en;
   const isHi = lang === 'hi';
+
+  const activeQuestions = examSummary?.questions || (questions && questions.length > 0 ? questions : defaultQuestions);
+  const activeTestInfo = examSummary?.testInfo || testInfo;
 
   const userAnswers = examSummary?.answers || {
     1: 'A', 2: 'C', 3: 'C', 4: 'D', 5: 'B'
@@ -16,29 +20,63 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
   let correctCount = 0;
   let incorrectCount = 0;
   let skippedCount = 0;
+  let totalScore = 0;
+  let maxScore = 0;
 
-  defaultQuestions.forEach((q) => {
+  activeQuestions.forEach((q) => {
+    const qMarks = q.marks || 1;
+    maxScore += qMarks;
     const ans = userAnswers[q.id];
     if (!ans) {
       skippedCount++;
     } else if (ans === q.correctAnswer) {
       correctCount++;
+      totalScore += qMarks;
     } else {
       incorrectCount++;
     }
   });
 
-  const totalScore = correctCount * 4;
-  const maxScore = defaultQuestions.length * 4;
-  const percentage = Math.round((totalScore / maxScore) * 100);
+  const percentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
 
-  const subjectBreakdown = [
-    { topic: 'Physics & Motion', topicHi: 'भौतिक विज्ञान व गति', score: 88, color: '#60D6A7' },
-    { topic: 'Optics & Light', topicHi: 'प्रकाशिकी व लेंस', score: 80, color: '#7F58FA' },
-    { topic: 'Algebra & Polynomials', topicHi: 'बीजगणित व बहुपद', score: 90, color: '#93C5FD' },
-    { topic: 'Cell Biology', topicHi: 'कोशिका विज्ञान', score: 85, color: '#FFB3C7' },
-    { topic: 'Mensuration', topicHi: 'क्षेत्रमिति', score: 80, color: '#FDE68A' },
-  ];
+  // Dynamic chapter breakdown
+  const chaptersMap = {};
+  activeQuestions.forEach((q) => {
+    const chap = q.chapter || q.section || q.topic || 'General';
+    if (!chaptersMap[chap]) {
+      chaptersMap[chap] = { total: 0, correct: 0 };
+    }
+    chaptersMap[chap].total++;
+    if (userAnswers[q.id] === q.correctAnswer) {
+      chaptersMap[chap].correct++;
+    }
+  });
+
+  const colors = ['#7F58FA', '#60D6A7', '#3B82F6', '#EC4899', '#F59E0B', '#10B981', '#8B5CF6'];
+  const subjectBreakdown = Object.keys(chaptersMap).map((chapName, idx) => {
+    const item = chaptersMap[chapName];
+    const scorePct = item.total > 0 ? Math.round((item.correct / item.total) * 100) : 0;
+    
+    let labelHi = chapName
+      .replace('Chapter 5: Getting Started with Python', 'अध्याय 5: पायथन की शुरुआत')
+      .replace('Chapter 6: Flow of Control', 'अध्याय 6: प्रवाह नियंत्रण (कंट्रोल फ्लो)')
+      .replace('Chapter 7: Functions', 'अध्याय 7: फंक्शंस (Functions)')
+      .replace('Chapter 8: Strings', 'अध्याय 8: स्ट्रिंग्स (Strings)')
+      .replace('Chapter 9: Lists', 'अध्याय 9: लिस्ट्स (Lists)')
+      .replace('Chapter 10: Tuples & Dictionaries', 'अध्याय 10: टुपल्स एवं डिक्शनरी')
+      .replace('Section A - Physics', 'भाग अ - भौतिकी')
+      .replace('Section A - Science', 'भाग अ - विज्ञान')
+      .replace('Section A - Mathematics', 'भाग अ - गणित');
+
+    return {
+      topic: chapName,
+      topicHi: labelHi,
+      score: scorePct,
+      correct: item.correct,
+      total: item.total,
+      color: colors[idx % colors.length]
+    };
+  });
 
   return (
     <div className="min-h-screen bg-[#FDFAFF] flex">
@@ -49,7 +87,7 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
           <div>
             <h1 className="text-xl font-extrabold text-gray-900">{t.resultsTitle}</h1>
             <p className="text-xs text-gray-500">
-              GSSS 52 LNP (MANJHUWAS) &bull; {isHi ? 'कक्षा 10 मूल्यांकन रिपोर्ट' : 'Class 10 Assessment Report Card'}
+              GSSS 52 LNP (MANJHUWAS) &bull; {activeTestInfo ? (isHi ? activeTestInfo.titleHi || activeTestInfo.title : activeTestInfo.title) : (isHi ? 'कक्षा 10 मूल्यांकन रिपोर्ट' : 'Class 10 Assessment Report Card')}
             </p>
           </div>
 
@@ -107,7 +145,7 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
               </div>
 
               <div className="mt-5 w-full py-2.5 px-4 bg-[#E9FBF3] border border-emerald-200 rounded-2xl flex items-center justify-center gap-2 text-emerald-800 text-xs font-bold">
-                <span>{t.greatPerformance}</span>
+                <span>{percentage >= 75 ? (isHi ? 'शानदार प्रदर्शन! आपने परीक्षा उत्तीर्ण की!' : 'Outstanding Performance! You mastered this test!') : t.greatPerformance}</span>
               </div>
             </div>
 
@@ -116,7 +154,7 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div className="bg-white p-3.5 rounded-2xl border border-gray-100 shadow-soft text-center">
                   <p className="text-[11px] text-gray-400 font-semibold">{isHi ? 'कुल प्रश्न' : 'Total Questions'}</p>
-                  <p className="text-xl font-extrabold text-gray-900 mt-1">{defaultQuestions.length}</p>
+                  <p className="text-xl font-extrabold text-gray-900 mt-1">{activeQuestions.length}</p>
                 </div>
                 <div className="bg-white p-3.5 rounded-2xl border border-emerald-100 bg-emerald-50/30 shadow-soft text-center">
                   <p className="text-[11px] text-emerald-700 font-semibold">{isHi ? 'सही उत्तर' : 'Correct'}</p>
@@ -128,20 +166,27 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
                 </div>
                 <div className="bg-white p-3.5 rounded-2xl border border-blue-100 bg-blue-50/30 shadow-soft text-center">
                   <p className="text-[11px] text-blue-700 font-semibold">{isHi ? 'ग्रेड' : 'Grade'}</p>
-                  <p className="text-xl font-extrabold text-blue-600 mt-1">A1</p>
+                  <p className="text-xl font-extrabold text-blue-600 mt-1">
+                    {percentage >= 90 ? 'A1' : percentage >= 80 ? 'A2' : percentage >= 70 ? 'B1' : percentage >= 60 ? 'B2' : 'C1'}
+                  </p>
                 </div>
               </div>
 
               <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-soft">
-                <h3 className="text-sm font-extrabold text-gray-900 mb-4">{t.subjectAnalysis}</h3>
-                <div className="space-y-3.5">
+                <h3 className="text-sm font-extrabold text-gray-900 mb-4">
+                  {isHi ? 'अध्यायवार विश्लेषण (Chapter Analysis)' : t.subjectAnalysis}
+                </h3>
+                <div className="space-y-3.5 max-h-[220px] overflow-y-auto pr-1">
                   {subjectBreakdown.map((item) => (
                     <div key={item.topic} className="space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-gray-700">
                           {isHi ? item.topicHi : item.topic}
                         </span>
-                        <span className="font-bold text-gray-900">{item.score}%</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[11px] text-gray-400">({item.correct}/{item.total})</span>
+                          <span className="font-bold text-gray-900">{item.score}%</span>
+                        </div>
                       </div>
                       <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                         <div
@@ -164,24 +209,24 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-5 mb-5">
               <h3 className="text-sm font-extrabold text-gray-900">{t.questionAnalysis}</h3>
               <span className="text-xs text-gray-500 font-medium">
-                GSSS 52 LNP &bull; {defaultQuestions.length} {isHi ? 'प्रश्न' : 'Questions'}
+                GSSS 52 LNP &bull; {activeQuestions.length} {isHi ? 'प्रश्न' : 'Questions'}
               </span>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto max-h-[480px] overflow-y-auto">
               <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="border-b border-gray-100 text-gray-400 font-bold uppercase tracking-wider">
+                <thead className="sticky top-0 bg-white z-10">
+                  <tr className="border-b border-gray-200 text-gray-400 font-bold uppercase tracking-wider">
                     <th className="pb-3 pl-2">#</th>
                     <th className="pb-3">{isHi ? 'आपका उत्तर' : 'Your Answer'}</th>
                     <th className="pb-3">{isHi ? 'सही उत्तर' : 'Correct Answer'}</th>
                     <th className="pb-3">{isHi ? 'स्थिति' : 'Status'}</th>
-                    <th className="pb-3">{isHi ? 'अध्याय' : 'Topic'}</th>
+                    <th className="pb-3">{isHi ? 'अध्याय / विषय' : 'Topic / Chapter'}</th>
                     <th className="pb-3 pr-2 text-right">{isHi ? 'हल देखें' : 'Solution'}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
-                  {defaultQuestions.map((q, idx) => {
+                  {activeQuestions.map((q, idx) => {
                     const ans = userAnswers[q.id];
                     const isCorrect = ans === q.correctAnswer;
                     const isSkipped = !ans;
@@ -214,11 +259,14 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
                             </span>
                           )}
                         </td>
-                        <td className="py-3.5 text-gray-700 font-medium">{q.topic}</td>
+                        <td className="py-3.5 text-gray-700 font-medium">
+                          <span className="text-gray-900 font-semibold">{q.topic}</span>
+                          {q.chapter && <span className="block text-[10px] text-gray-400">{q.chapter}</span>}
+                        </td>
                         <td className="py-3.5 pr-2 text-right">
                           <button
-                            onClick={() => alert(`Solution (हल):\n${isHi && q.explanationHi ? q.explanationHi : q.explanation}`)}
-                            className="text-[#7F58FA] font-bold hover:underline"
+                            onClick={() => setSelectedSolutionQ(q)}
+                            className="px-3 py-1 bg-[#F3EFFF] text-[#7F58FA] rounded-full font-bold hover:bg-[#7F58FA] hover:text-white transition-all text-xs"
                           >
                             {isHi ? 'हल देखें' : 'View Solution'}
                           </button>
@@ -232,6 +280,93 @@ export const TestResults = ({ examSummary, onNavigate, lang = 'en' }) => {
           </div>
         </main>
       </div>
+
+      {/* Solution Detail Modal */}
+      {selectedSolutionQ && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+              <div>
+                <span className="text-xs font-bold text-[#7F58FA]">
+                  {selectedSolutionQ.chapter || 'Question Solution'}
+                </span>
+                <h3 className="text-base font-extrabold text-gray-900">
+                  {isHi ? `प्रश्न संख्या ${selectedSolutionQ.id} का विस्तृत हल` : `Question ${selectedSolutionQ.id} Detailed Solution`}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedSolutionQ(null)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 font-bold flex items-center justify-center text-sm"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4 text-xs">
+              <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <p className="text-sm font-semibold text-gray-900 leading-relaxed">
+                  {isHi && selectedSolutionQ.questionHi ? selectedSolutionQ.questionHi : selectedSolutionQ.question}
+                </p>
+              </div>
+
+              {selectedSolutionQ.options && (
+                <div className="space-y-2">
+                  <p className="font-bold text-gray-700">{isHi ? 'विकल्प:' : 'Options:'}</p>
+                  {selectedSolutionQ.options.map((opt) => {
+                    const isRight = opt.id === selectedSolutionQ.correctAnswer;
+                    const wasChosen = userAnswers[selectedSolutionQ.id] === opt.id;
+                    return (
+                      <div
+                        key={opt.id}
+                        className={`p-3 rounded-xl border flex items-center justify-between ${
+                          isRight
+                            ? 'bg-emerald-50 border-emerald-300 text-emerald-900 font-bold'
+                            : wasChosen
+                            ? 'bg-rose-50 border-rose-300 text-rose-900'
+                            : 'bg-white border-gray-200 text-gray-700'
+                        }`}
+                      >
+                        <span>
+                          <strong className="mr-2">{opt.id}.</strong>
+                          {isHi && opt.textHi ? opt.textHi : opt.text}
+                        </span>
+                        {isRight && (
+                          <span className="text-xs text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-bold">
+                            ✓ {isHi ? 'सही उत्तर' : 'Correct Answer'}
+                          </span>
+                        )}
+                        {!isRight && wasChosen && (
+                          <span className="text-xs text-rose-600 bg-rose-100 px-2 py-0.5 rounded-full font-bold">
+                            ✕ {isHi ? 'आपका उत्तर' : 'Your Answer'}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100">
+                <p className="font-bold text-[#7F58FA] mb-1">
+                  💡 {isHi ? 'व्याख्या एवं स्पष्टीकरण:' : 'Explanation:'}
+                </p>
+                <p className="text-xs text-gray-800 leading-relaxed">
+                  {isHi && selectedSolutionQ.explanationHi ? selectedSolutionQ.explanationHi : selectedSolutionQ.explanation}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setSelectedSolutionQ(null)}
+                className="px-6 py-2 rounded-full bg-[#7F58FA] text-white text-xs font-bold hover:bg-[#6C44E8] shadow-md shadow-[#7F58FA]/20"
+              >
+                {isHi ? 'बंद करें' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
