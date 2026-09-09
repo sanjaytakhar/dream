@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookmarkIcon, ClockIcon, PauseIcon, PlayIcon } from '../common/Icons';
+import { ClockIcon, PauseIcon, PlayIcon } from '../common/Icons';
 import { defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
@@ -152,13 +152,10 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
               {activeQuestions.map((q, idx) => {
                 const isCurrent = idx === currentIdx;
                 const isAnswered = !!answers[q.id];
-                const isMarked = !!markedForReview[q.id];
 
                 let bgClass = 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-                if (isMarked) {
-                  bgClass = 'bg-amber-400 text-white shadow-sm';
-                } else if (isAnswered) {
-                  bgClass = 'bg-emerald-500 text-white shadow-sm';
+                if (isAnswered) {
+                  bgClass = 'bg-emerald-500 text-white shadow-sm font-extrabold';
                 }
 
                 return (
@@ -181,10 +178,6 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span>
               <span className="text-gray-600 font-medium">{t.answered} ({answeredCount})</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-amber-400 shrink-0"></span>
-              <span className="text-gray-600 font-medium">{t.markedForReview} ({reviewCount})</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-gray-200 shrink-0"></span>
@@ -212,20 +205,9 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="text-xs font-semibold text-gray-500 hidden sm:block">
+                <div className="text-xs font-semibold text-gray-500">
                   {isHi ? 'अंक:' : 'Marks:'} <span className="text-emerald-600 font-bold">+{currentQ.marks}</span>
                 </div>
-                <button
-                  onClick={toggleMarkForReview}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
-                    markedForReview[currentQ.id]
-                      ? 'bg-amber-50 text-amber-700 border-amber-300'
-                      : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'
-                  }`}
-                >
-                  <BookmarkIcon className="w-3.5 h-3.5" filled={markedForReview[currentQ.id]} />
-                  <span>{markedForReview[currentQ.id] ? t.markedForReview : t.markForReview}</span>
-                </button>
               </div>
             </div>
 
@@ -301,7 +283,7 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                 onClick={handleSaveAndNext}
                 className="px-7 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95"
               >
-                {currentIdx === activeQuestions.length - 1 ? (isHi ? 'समीक्षा करें' : 'Review & Submit') : `${t.saveAndNext} \u2192`}
+                {currentIdx === activeQuestions.length - 1 ? (isHi ? 'परीक्षा सबमिट करें' : 'Submit Exam') : `${t.saveAndNext} \u2192`}
               </button>
             </div>
           </div>
@@ -324,9 +306,9 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                 <span>{isHi ? 'हल किए गए:' : 'Attempted:'}</span>
                 <span className="font-bold">{answeredCount}</span>
               </div>
-              <div className="flex justify-between font-medium text-amber-600">
-                <span>{isHi ? 'समीक्षा हेतु शेष:' : 'Marked for Review:'}</span>
-                <span className="font-bold">{reviewCount}</span>
+              <div className="flex justify-between font-medium text-gray-500">
+                <span>{isHi ? 'हल नहीं किए गए:' : 'Unattempted:'}</span>
+                <span className="font-bold">{notAnsweredCount}</span>
               </div>
             </div>
 

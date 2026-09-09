@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SearchIcon, StarIcon } from '../common/Icons';
+import { SearchIcon } from '../common/Icons';
 import { mockTests } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
@@ -220,23 +220,14 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
                   </div>
                 </div>
 
-                {/* Right side */}
-                <div className="flex items-center justify-between md:justify-end gap-6 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
-                  <div className="text-left md:text-right">
-                    <p className="text-xs text-gray-400 font-medium">
-                      {test.attempts.toLocaleString()} {t.attempts}
-                    </p>
-                    <div className="flex items-center gap-1 mt-0.5 text-xs font-bold text-gray-800">
-                      <StarIcon className="w-3.5 h-3.5" />
-                      <span>{test.rating}</span>
-                    </div>
-                  </div>
-
+                {/* Right side - Start Test button */}
+                <div className="flex items-center justify-end pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
                   <button
                     onClick={() => onStartTest(test)}
-                    className="px-6 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0"
+                    className="px-6 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0 flex items-center gap-1.5"
                   >
-                    {t.startTest}
+                    <span>✍️</span>
+                    <span>{t.startTest}</span>
                   </button>
                 </div>
               </div>
