@@ -58,6 +58,9 @@ export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang
     const scorePct = item.total > 0 ? Math.round((item.correct / item.total) * 100) : 0;
     
     let labelHi = chapName
+      .replace('Chapter 1: Crop Production and Management', 'अध्याय 1: फसल उत्पादन एवं प्रबंध')
+      .replace('Chapter 5: Coal and Petroleum', 'अध्याय 5: कोयला और पेट्रोलियम')
+      .replace('Chapter 7: Conservation of Plants and Animals', 'अध्याय 7: पौधे एवं जंतुओं का संरक्षण')
       .replace('Chapter 5: Getting Started with Python', 'अध्याय 5: पायथन की शुरुआत')
       .replace('Chapter 6: Flow of Control', 'अध्याय 6: प्रवाह नियंत्रण (कंट्रोल फ्लो)')
       .replace('Chapter 7: Functions', 'अध्याय 7: फंक्शंस (Functions)')

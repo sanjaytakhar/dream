@@ -15,12 +15,19 @@ import { StudentProfile } from './components/screens/StudentProfile';
 
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
+import {
+  class8CropQuestions,
+  class8CoalQuestions,
+  class8ConservationQuestions,
+  class8CombinedResourcesQuestions,
+  class8GrandMasterQuestions
+} from './data/class8ScienceQuestions';
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState('landing');
   const [lang, setLang] = useState('hi'); // Defaulting to Hindi or easily toggleable
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
-  const [activeTest, setActiveTest] = useState(mockTests[0]); // Default to Class 11 CS test
+  const [activeTest, setActiveTest] = useState(mockTests[0]); // Default to active test
   const [activeQuestions, setActiveQuestions] = useState(class11CsQuestions);
   const [examSummary, setExamSummary] = useState(null);
   const [customQuestions, setCustomQuestions] = useState([]);
@@ -40,7 +47,17 @@ export function App() {
     }
     setActiveTest(test);
 
-    if (
+    if (test.id === 'c8-sci-t1-crops') {
+      setActiveQuestions(class8CropQuestions);
+    } else if (test.id === 'c8-sci-t2-coal-petro') {
+      setActiveQuestions(class8CoalQuestions);
+    } else if (test.id === 'c8-sci-t3-conservation') {
+      setActiveQuestions(class8ConservationQuestions);
+    } else if (test.id === 'c8-sci-t4-resources') {
+      setActiveQuestions(class8CombinedResourcesQuestions);
+    } else if (test.id === 'c8-sci-t5-grand') {
+      setActiveQuestions(class8GrandMasterQuestions);
+    } else if (
       test.id === 'c11-cs-python' ||
       test.subject === 'Computer Science' ||
       (test.title && test.title.includes('Computer Science'))
