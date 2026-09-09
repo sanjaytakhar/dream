@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/common/Navbar';
+import { UiverseLoader } from './components/common/UiverseLoader';
 
 import { LandingPage } from './components/screens/LandingPage';
 import { MockTestsCatalog } from './components/screens/MockTestsCatalog';
@@ -23,6 +24,7 @@ export function App() {
   const [activeTest, setActiveTest] = useState(mockTests[0]);
   const [activeQuestions, setActiveQuestions] = useState(class8CropQuestions);
   const [examSummary, setExamSummary] = useState(null);
+  const [loadingOverlay, setLoadingOverlay] = useState(null);
 
   const toggleLang = () => {
     setLang((prev) => (prev === 'en' ? 'hi' : 'en'));
@@ -59,18 +61,56 @@ export function App() {
       setActiveQuestions(defaultQuestions);
     }
 
-    setCurrentScreen('cbt');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setLoadingOverlay({
+      text: lang === 'hi' ? 'परीक्षा लोड हो रही है' : 'Loading Examination',
+      subtitle: lang === 'hi' ? 'प्रश्न पत्र तैयार किया जा रहा है...' : 'Preparing question paper...'
+    });
+
+    setTimeout(() => {
+      setCurrentScreen('cbt');
+      setLoadingOverlay(null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1300);
   };
 
   const handleFinishExam = (summary) => {
     setExamSummary(summary);
-    setCurrentScreen('results');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setLoadingOverlay({
+      text: lang === 'hi' ? 'अंक तालिका तैयार हो रही है' : 'Generating Report Card',
+      subtitle: lang === 'hi' ? 'उत्तरों की जांच व विश्लेषण किया जा रहा है...' : 'Evaluating answers and calculating score...'
+    });
+
+    setTimeout(() => {
+      setCurrentScreen('results');
+      setLoadingOverlay(null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1300);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFAFF] font-sans antialiased text-[#1F2937]">
+      {/* Uiverse Loader Modal Overlay */}
+      {loadingOverlay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all">
+          <div className="bg-[#1a1a24] border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 text-center animate-in fade-in zoom-in-95 duration-200">
+            <img
+              src={`${import.meta.env.BASE_URL}rajasthan-education-logo.png`}
+              alt="Official Logo"
+              className="w-14 h-14 object-contain mb-4 drop-shadow-md"
+            />
+            <UiverseLoader text={loadingOverlay.text} />
+            {loadingOverlay.subtitle && (
+              <p className="mt-4 text-xs sm:text-sm text-gray-300 font-medium leading-relaxed">
+                {loadingOverlay.subtitle}
+              </p>
+            )}
+            <span className="mt-3 text-[11px] text-[#2dc38c] font-semibold tracking-wider uppercase">
+              GSSS 52 LNP (MANJHUWAS)
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Clean School Header across all browsing pages */}
       {currentScreen !== 'cbt' && (
         <Navbar
