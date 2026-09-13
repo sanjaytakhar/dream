@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DownloadIcon, ChevronRight, CheckIcon, CloseIcon } from '../common/Icons';
-import { mockTests } from '../../data/mockData';
+import { mockTests, defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
 
 export const TestResults = ({ examSummary, questions, testInfo, onNavigate, lang = 'en' }) => {

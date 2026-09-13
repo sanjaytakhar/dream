@@ -28,66 +28,171 @@ import {
   class6MathsTest3Questions
 } from './data/class6MathsQuestions';
 
+// Storage Keys
+export const EXAM_STORAGE_KEY = 'pariksha_active_exam';
+export const RESULTS_STORAGE_KEY = 'pariksha_last_results';
+export const LANG_STORAGE_KEY = 'pariksha_lang';
+
+export function getTestById(testId) {
+  if (!testId) return mockTests[0];
+  return mockTests.find((t) => t.id === testId) || mockTests[0];
+}
+
+export function getQuestionsForTest(testOrId) {
+  const testId = typeof testOrId === 'string' ? testOrId : testOrId?.id;
+  if (!testId) return class6MathsTest1Questions;
+
+  // Class 6 Mathematics Chapter 10 Tests
+  if (testId === 'c6-maths-ch10-t1') {
+    return class6MathsTest1Questions;
+  } else if (testId === 'c6-maths-ch10-t2') {
+    return class6MathsTest2Questions;
+  } else if (testId === 'c6-maths-ch10-t3') {
+    return class6MathsTest3Questions;
+  // Class 12 Board Computer Science Papers
+  } else if (testId === 'c12-cs-board-2025') {
+    return class12CsBoard2025Questions;
+  } else if (testId === 'c12-cs-board-2023') {
+    return class12CsBoard2023Questions;
+  } else if (testId === 'c12-cs-board-2022') {
+    return class12CsBoard2022Questions;
+  } else if (testId === 'c12-cs-grand-master') {
+    return class12CsGrandMasterQuestions;
+  // Class 8 Science Tests
+  } else if (testId === 'c8-sci-t1-crops') {
+    return class8CropQuestions;
+  } else if (testId === 'c8-sci-t2-coal-petro') {
+    return class8CoalQuestions;
+  } else if (testId === 'c8-sci-t3-conservation') {
+    return class8ConservationQuestions;
+  } else if (testId === 'c8-sci-t4-resources') {
+    return class8CombinedResourcesQuestions;
+  } else if (testId === 'c8-sci-t5-grand') {
+    return class8GrandMasterQuestions;
+  // Class 11 CS
+  } else if (
+    testId === 'c11-cs-python' ||
+    (typeof testOrId === 'object' && testOrId?.schoolClass === 'Class 11' && testOrId?.subject === 'Computer Science')
+  ) {
+    return class11CsQuestions;
+  } else {
+    return defaultQuestions;
+  }
+}
+
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState('landing');
-  const [lang, setLang] = useState('hi'); // Defaulting to Hindi
+  // Check if there is an active exam or scorecard saved in localStorage
+  const [initialState] = useState(() => {
+    try {
+      const savedActiveExam = localStorage.getItem(EXAM_STORAGE_KEY);
+      if (savedActiveExam) {
+        const session = JSON.parse(savedActiveExam);
+        if (session && session.testId && session.endTime) {
+          const remaining = Math.max(0, Math.floor((session.endTime - Date.now()) / 1000));
+          if (remaining > 0) {
+            const test = getTestById(session.testId);
+            const questions = getQuestionsForTest(test);
+            return {
+              screen: 'cbt',
+              activeTest: test,
+              activeQuestions: questions,
+              restoredSession: session,
+              examSummary: null
+            };
+          } else {
+            // Exam session expired
+            localStorage.removeItem(EXAM_STORAGE_KEY);
+          }
+        }
+      }
+
+      // If not taking exam, check if user was on results page
+      const savedResults = localStorage.getItem(RESULTS_STORAGE_KEY);
+      if (savedResults) {
+        const parsed = JSON.parse(savedResults);
+        if (parsed && parsed.examSummary) {
+          const test = parsed.activeTest || getTestById(parsed.activeTestId);
+          const questions = parsed.examSummary.questions || getQuestionsForTest(test);
+          return {
+            screen: 'results',
+            activeTest: test,
+            activeQuestions: questions,
+            restoredSession: null,
+            examSummary: parsed.examSummary
+          };
+        }
+      }
+    } catch (e) {
+      console.error('Error recovering state from localStorage:', e);
+    }
+    return null;
+  });
+
+  const [currentScreen, setCurrentScreen] = useState(
+    initialState ? initialState.screen : 'landing'
+  );
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem(LANG_STORAGE_KEY) || 'hi';
+  });
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
-  const [activeTest, setActiveTest] = useState(mockTests[0]);
-  const [activeQuestions, setActiveQuestions] = useState(class6MathsTest1Questions);
-  const [examSummary, setExamSummary] = useState(null);
+  const [activeTest, setActiveTest] = useState(
+    initialState ? initialState.activeTest : mockTests[0]
+  );
+  const [activeQuestions, setActiveQuestions] = useState(
+    initialState ? initialState.activeQuestions : class6MathsTest1Questions
+  );
+  const [examSummary, setExamSummary] = useState(
+    initialState ? initialState.examSummary : null
+  );
+  const [restoredSession, setRestoredSession] = useState(
+    initialState ? initialState.restoredSession : null
+  );
   const [loadingOverlay, setLoadingOverlay] = useState(null);
 
   const toggleLang = () => {
-    setLang((prev) => (prev === 'en' ? 'hi' : 'en'));
+    setLang((prev) => {
+      const next = prev === 'en' ? 'hi' : 'en';
+      try {
+        localStorage.setItem(LANG_STORAGE_KEY, next);
+      } catch (e) {}
+      return next;
+    });
   };
 
   const handleStartExam = (testOrId) => {
     let test = null;
     if (typeof testOrId === 'string') {
-      test = mockTests.find((t) => t.id === testOrId) || mockTests[0];
+      test = getTestById(testOrId);
     } else if (testOrId && typeof testOrId === 'object' && testOrId.id) {
       test = testOrId;
     } else {
       test = mockTests[0];
     }
-    setActiveTest(test);
+    const questions = getQuestionsForTest(test);
 
-    // Class 6 Mathematics Chapter 10 Tests
-    if (test.id === 'c6-maths-ch10-t1') {
-      setActiveQuestions(class6MathsTest1Questions);
-    } else if (test.id === 'c6-maths-ch10-t2') {
-      setActiveQuestions(class6MathsTest2Questions);
-    } else if (test.id === 'c6-maths-ch10-t3') {
-      setActiveQuestions(class6MathsTest3Questions);
-    // Class 12 Board Computer Science Papers
-    } else if (test.id === 'c12-cs-board-2025') {
-      setActiveQuestions(class12CsBoard2025Questions);
-    } else if (test.id === 'c12-cs-board-2023') {
-      setActiveQuestions(class12CsBoard2023Questions);
-    } else if (test.id === 'c12-cs-board-2022') {
-      setActiveQuestions(class12CsBoard2022Questions);
-    } else if (test.id === 'c12-cs-grand-master') {
-      setActiveQuestions(class12CsGrandMasterQuestions);
-    // Class 8 Science Tests
-    } else if (test.id === 'c8-sci-t1-crops') {
-      setActiveQuestions(class8CropQuestions);
-    } else if (test.id === 'c8-sci-t2-coal-petro') {
-      setActiveQuestions(class8CoalQuestions);
-    } else if (test.id === 'c8-sci-t3-conservation') {
-      setActiveQuestions(class8ConservationQuestions);
-    } else if (test.id === 'c8-sci-t4-resources') {
-      setActiveQuestions(class8CombinedResourcesQuestions);
-    } else if (test.id === 'c8-sci-t5-grand') {
-      setActiveQuestions(class8GrandMasterQuestions);
-    // Class 11 CS
-    } else if (
-      test.id === 'c11-cs-python' ||
-      (test.schoolClass === 'Class 11' && test.subject === 'Computer Science')
-    ) {
-      setActiveQuestions(class11CsQuestions);
-    } else {
-      setActiveQuestions(defaultQuestions);
-    }
+    setActiveTest(test);
+    setActiveQuestions(questions);
+
+    const durationSecs = test.durationMins
+      ? test.durationMins * 60
+      : (questions.length === 40 ? 3600 : 5400);
+
+    const newSession = {
+      testId: test.id,
+      endTime: Date.now() + durationSecs * 1000,
+      initialDuration: durationSecs,
+      answers: {},
+      markedForReview: {},
+      currentIdx: 0,
+      startedAt: Date.now()
+    };
+
+    try {
+      localStorage.setItem(EXAM_STORAGE_KEY, JSON.stringify(newSession));
+      localStorage.removeItem(RESULTS_STORAGE_KEY);
+    } catch (e) {}
+
+    setRestoredSession(newSession);
 
     setLoadingOverlay({
       text: lang === 'hi' ? 'परीक्षा लोड हो रही है' : 'Loading Examination',
@@ -102,6 +207,20 @@ export function App() {
   };
 
   const handleFinishExam = (summary) => {
+    try {
+      localStorage.removeItem(EXAM_STORAGE_KEY);
+      localStorage.setItem(
+        RESULTS_STORAGE_KEY,
+        JSON.stringify({
+          examSummary: summary,
+          activeTestId: activeTest?.id,
+          activeTest: activeTest,
+          timestamp: Date.now()
+        })
+      );
+    } catch (e) {}
+
+    setRestoredSession(null);
     setExamSummary(summary);
     setLoadingOverlay({
       text: lang === 'hi' ? 'अंक तालिका तैयार हो रही है' : 'Generating Report Card',
@@ -113,6 +232,25 @@ export function App() {
       setLoadingOverlay(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 1300);
+  };
+
+  const handleExitExam = () => {
+    try {
+      localStorage.removeItem(EXAM_STORAGE_KEY);
+    } catch (e) {}
+    setRestoredSession(null);
+    setCurrentScreen('catalog');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigate = (screen) => {
+    if (currentScreen === 'results') {
+      try {
+        localStorage.removeItem(RESULTS_STORAGE_KEY);
+      } catch (e) {}
+    }
+    setCurrentScreen(screen);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -142,10 +280,7 @@ export function App() {
       {/* Clean School Header across all browsing pages */}
       {currentScreen !== 'cbt' && (
         <Navbar
-          onNavigate={(screen) => {
-            setCurrentScreen(screen);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          onNavigate={handleNavigate}
           lang={lang}
           onToggleLang={toggleLang}
         />
@@ -155,10 +290,7 @@ export function App() {
       <div className="flex-1">
         {currentScreen === 'landing' && (
           <LandingPage
-            onNavigate={(screen) => {
-              setCurrentScreen(screen);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onNavigate={handleNavigate}
             onStartTest={handleStartExam}
             onSelectClassFilter={(cls) => setSelectedClassFilter(cls)}
             lang={lang}
@@ -168,10 +300,7 @@ export function App() {
         {currentScreen === 'catalog' && (
           <MockTestsCatalog
             selectedClassFilter={selectedClassFilter}
-            onNavigate={(screen) => {
-              setCurrentScreen(screen);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onNavigate={handleNavigate}
             onStartTest={handleStartExam}
             lang={lang}
           />
@@ -182,8 +311,9 @@ export function App() {
             questions={activeQuestions}
             testInfo={activeTest}
             onFinishExam={handleFinishExam}
-            onExit={() => setCurrentScreen('catalog')}
+            onExit={handleExitExam}
             lang={lang}
+            restoredSession={restoredSession}
           />
         )}
 
@@ -192,10 +322,7 @@ export function App() {
             examSummary={examSummary}
             questions={activeQuestions}
             testInfo={activeTest}
-            onNavigate={(screen) => {
-              setCurrentScreen(screen);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onNavigate={handleNavigate}
             lang={lang}
           />
         )}

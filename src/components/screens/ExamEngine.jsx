@@ -2,35 +2,186 @@ import React, { useState, useEffect } from 'react';
 import { ClockIcon, PauseIcon, PlayIcon } from '../common/Icons';
 import { defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
+const STORAGE_KEY = 'pariksha_active_exam';
 
-export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = 'en' }) => {
+const getInitialSession = (testId) => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && parsed.testId === testId) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.error('Error reading active exam from storage:', e);
+  }
+  return null;
+};
+
+export const ExamEngine = ({
+  questions,
+  testInfo,
+  onFinishExam,
+  onExit,
+  lang = 'en',
+  restoredSession = null
+}) => {
   const activeQuestions = questions && questions.length > 0 ? questions : defaultQuestions;
-  const initialTime = testInfo?.durationMins ? testInfo.durationMins * 60 : (activeQuestions.length === 40 ? 3600 : 5400);
+  const initialTime = testInfo?.durationMins
+    ? testInfo.durationMins * 60
+    : (activeQuestions.length === 40 ? 3600 : 5400);
 
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [markedForReview, setMarkedForReview] = useState({});
-  const [timeLeft, setTimeLeft] = useState(initialTime);
+  // Retrieve saved progress from localStorage or restored session
+  const existingSession = restoredSession || getInitialSession(testInfo?.id);
+
+  const [currentIdx, setCurrentIdx] = useState(() => {
+    if (existingSession && typeof existingSession.currentIdx === 'number') {
+      return Math.min(Math.max(0, existingSession.currentIdx), activeQuestions.length - 1);
+    }
+    return 0;
+  });
+
+  const [answers, setAnswers] = useState(() => {
+    if (existingSession && existingSession.answers) {
+      return existingSession.answers;
+    }
+    return {};
+  });
+
+  const [markedForReview, setMarkedForReview] = useState(() => {
+    if (existingSession && existingSession.markedForReview) {
+      return existingSession.markedForReview;
+    }
+    return {};
+  });
+
+  const [timeLeft, setTimeLeft] = useState(() => {
+    if (existingSession && existingSession.endTime) {
+      const remaining = Math.max(0, Math.floor((existingSession.endTime - Date.now()) / 1000));
+      return remaining > 0 ? remaining : initialTime;
+    }
+    return initialTime;
+  });
+
   const [isPaused, setIsPaused] = useState(false);
+  const [pauseStart, setPauseStart] = useState(null);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
+  const [showRestoredNotice, setShowRestoredNotice] = useState(() => {
+    return Boolean(
+      existingSession &&
+      (Object.keys(existingSession.answers || {}).length > 0 ||
+        existingSession.currentIdx > 0 ||
+        (existingSession.endTime && (existingSession.endTime - Date.now()) < (initialTime * 1000 - 5000)))
+    );
+  });
 
   const t = translations[lang] || translations.en;
   const isHi = lang === 'hi';
 
+  // Warn user before accidental page reload / closing tab during active exam
   useEffect(() => {
-    setTimeLeft(initialTime);
-    setCurrentIdx(0);
-    setAnswers({});
-    setMarkedForReview({});
-  }, [testInfo, questions]);
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+      return '';
+    };
 
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  // Auto-dismiss restore notice after 6 seconds
+  useEffect(() => {
+    if (showRestoredNotice) {
+      const timer = setTimeout(() => {
+        setShowRestoredNotice(false);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showRestoredNotice]);
+
+  // Synchronize state changes immediately to localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      let session = saved ? JSON.parse(saved) : null;
+      if (!session || session.testId !== testInfo?.id) {
+        session = {
+          testId: testInfo?.id,
+          endTime: Date.now() + timeLeft * 1000,
+          initialDuration: initialTime,
+          startedAt: Date.now()
+        };
+      }
+      session.answers = answers;
+      session.markedForReview = markedForReview;
+      session.currentIdx = currentIdx;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    } catch (e) {
+      console.error('Error saving exam progress to localStorage:', e);
+    }
+  }, [answers, markedForReview, currentIdx, testInfo?.id, initialTime, timeLeft]);
+
+  // Countdown timer synced with target endTime
   useEffect(() => {
     if (isPaused) return;
+
     const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const session = JSON.parse(saved);
+          if (session && session.endTime) {
+            const remaining = Math.max(0, Math.floor((session.endTime - Date.now()) / 1000));
+            setTimeLeft(remaining);
+            if (remaining <= 0) {
+              clearInterval(timer);
+              handleSubmitConfirmed();
+            }
+            return;
+          }
+        }
+      } catch (e) {}
+
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleSubmitConfirmed();
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
+
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, testInfo?.id]);
+
+  const togglePause = () => {
+    if (!isPaused) {
+      setIsPaused(true);
+      setPauseStart(Date.now());
+    } else {
+      setIsPaused(false);
+      if (pauseStart) {
+        const duration = Date.now() - pauseStart;
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const session = JSON.parse(saved);
+            if (session.endTime) {
+              session.endTime += duration;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+            }
+          }
+        } catch (e) {}
+        setPauseStart(null);
+      }
+    }
+  };
 
   const formatTime = (secs) => {
     const h = Math.floor(secs / 3600);
@@ -55,6 +206,8 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
   const handleSaveAndNext = () => {
     if (currentIdx < activeQuestions.length - 1) {
       setCurrentIdx(currentIdx + 1);
+    } else {
+      setShowSubmitModal(true);
     }
   };
 
@@ -70,11 +223,14 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
 
   const handleSubmitConfirmed = () => {
     setShowSubmitModal(false);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
     if (onFinishExam) {
       onFinishExam({
         answers,
         markedForReview,
-        timeTakenSecs: initialTime - timeLeft,
+        timeTakenSecs: Math.max(0, initialTime - timeLeft),
         totalQuestions: activeQuestions.length,
         questions: activeQuestions,
         testInfo
@@ -82,13 +238,44 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
     }
   };
 
+  const handleExitConfirmed = () => {
+    setShowExitModal(false);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+    if (onExit) {
+      onExit();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#FDFAFF] flex flex-col select-none">
+      {/* Restored Session Notification Banner */}
+      {showRestoredNotice && (
+        <div className="bg-emerald-500 text-white px-4 py-2.5 flex items-center justify-between text-xs sm:text-sm font-semibold shadow-md animate-in fade-in slide-in-from-top duration-300 z-40">
+          <div className="flex items-center gap-2.5 max-w-5xl mx-auto w-full">
+            <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse shrink-0"></span>
+            <span>
+              {isHi
+                ? '✅ परीक्षा सत्र पुनर्स्थापित किया गया: आपके हल किए गए उत्तर एवं शेष समय सुरक्षित हैं।'
+                : '✅ Exam session restored: Your saved responses and remaining time have been preserved.'}
+            </span>
+          </div>
+          <button
+            onClick={() => setShowRestoredNotice(false)}
+            className="text-white/80 hover:text-white font-bold ml-3 text-base shrink-0"
+            title={isHi ? 'बंद करें' : 'Close'}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* CBT Header */}
       <header className="bg-white border-b border-[#E5E7EB] px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm sticky top-0 z-30">
         <div className="flex items-center gap-3">
           <img
-            src="./rajasthan-education-logo.png"
+            src={`${import.meta.env.BASE_URL}rajasthan-education-logo.png`}
             alt="सतत् एवं व्यापक शिक्षा"
             className="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-sm shrink-0"
           />
@@ -102,15 +289,15 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
           </div>
         </div>
 
-        {/* Timer & Controls */}
-        <div className="flex items-center gap-3 sm:gap-5">
+        {/* Timer, Exit & Submit Controls */}
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-full shadow-inner">
             <ClockIcon className="w-4 h-4 text-[#7F58FA]" />
             <span className="font-mono text-sm sm:text-base font-bold text-gray-800 tracking-wider">
               {formatTime(timeLeft)}
             </span>
             <button
-              onClick={() => setIsPaused(!isPaused)}
+              onClick={togglePause}
               title={isPaused ? "Resume" : "Pause"}
               className="ml-1 text-gray-400 hover:text-gray-700 transition-colors"
             >
@@ -120,9 +307,17 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
 
           <button
             onClick={() => setShowSubmitModal(true)}
-            className="px-5 py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-bold shadow-md shadow-rose-500/20 transition-all hover:scale-105 active:scale-95"
+            className="px-4 sm:px-5 py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs sm:text-sm font-bold shadow-md shadow-rose-500/20 transition-all hover:scale-105 active:scale-95"
           >
             {t.submit}
+          </button>
+
+          <button
+            onClick={() => setShowExitModal(true)}
+            title={isHi ? 'परीक्षा से बाहर निकलें' : 'Exit Exam'}
+            className="px-3 sm:px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-600 hover:text-gray-900 text-xs font-semibold transition-all"
+          >
+            {isHi ? 'बाहर निकलें' : 'Exit'}
           </button>
         </div>
       </header>
@@ -152,10 +347,15 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
               {activeQuestions.map((q, idx) => {
                 const isCurrent = idx === currentIdx;
                 const isAnswered = !!answers[q.id];
+                const isMarked = !!markedForReview[q.id];
 
                 let bgClass = 'bg-gray-100 text-gray-700 hover:bg-gray-200';
-                if (isAnswered) {
+                if (isAnswered && isMarked) {
+                  bgClass = 'bg-purple-600 text-white shadow-sm font-extrabold';
+                } else if (isAnswered) {
                   bgClass = 'bg-emerald-500 text-white shadow-sm font-extrabold';
+                } else if (isMarked) {
+                  bgClass = 'bg-amber-500 text-white shadow-sm font-extrabold';
                 }
 
                 return (
@@ -167,6 +367,9 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                     }`}
                   >
                     {idx + 1}
+                    {isMarked && (
+                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full border border-white"></span>
+                    )}
                   </button>
                 );
               })}
@@ -178,6 +381,10 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span>
               <span className="text-gray-600 font-medium">{t.answered} ({answeredCount})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-amber-500 shrink-0"></span>
+              <span className="text-gray-600 font-medium">{isHi ? 'समीक्षा हेतु चिह्नित' : 'Marked for Review'} ({reviewCount})</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-gray-200 shrink-0"></span>
@@ -263,7 +470,7 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
           </div>
 
           {/* Bottom Navigation Buttons */}
-          <div className="flex items-center justify-between pt-6 border-t border-gray-100 mt-8">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-gray-100 mt-8">
             <button
               onClick={handlePrevious}
               disabled={currentIdx === 0}
@@ -276,7 +483,7 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
               &larr; {t.previous}
             </button>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               {answers[currentQ.id] && (
                 <button
                   onClick={() => {
@@ -291,6 +498,19 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
               )}
 
               <button
+                onClick={toggleMarkForReview}
+                className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
+                  markedForReview[currentQ.id]
+                    ? 'border-amber-400 bg-amber-50 text-amber-700'
+                    : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {markedForReview[currentQ.id]
+                  ? (isHi ? '★ समीक्षा हेतु चिह्नित' : '★ Marked for Review')
+                  : (isHi ? '☆ समीक्षा हेतु चिह्न लगाएं' : '☆ Mark for Review')}
+              </button>
+
+              <button
                 onClick={handleSaveAndNext}
                 className="px-7 py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95"
               >
@@ -300,6 +520,29 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
           </div>
         </div>
       </div>
+
+      {/* Examination Paused Modal */}
+      {isPaused && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 text-2xl font-bold">
+              ⏸️
+            </div>
+            <h3 className="text-lg font-extrabold text-gray-900 mb-2">
+              {isHi ? 'परीक्षा रुकी हुई है' : 'Examination Paused'}
+            </h3>
+            <p className="text-xs text-gray-500 mb-6 leading-relaxed">
+              {isHi ? 'टाइमर रुका हुआ है। परीक्षा जारी रखने के लिए नीचे क्लिक करें।' : 'Timer is paused. Click below when you are ready to resume.'}
+            </p>
+            <button
+              onClick={togglePause}
+              className="w-full py-3 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95"
+            >
+              {isHi ? 'परीक्षा पुनः शुरू करें' : 'Resume Examination'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Confirmation Modal */}
       {showSubmitModal && (
@@ -317,6 +560,12 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                 <span>{isHi ? 'हल किए गए:' : 'Attempted:'}</span>
                 <span className="font-bold">{answeredCount}</span>
               </div>
+              {reviewCount > 0 && (
+                <div className="flex justify-between font-medium text-amber-600">
+                  <span>{isHi ? 'समीक्षा हेतु चिह्नित:' : 'Marked for Review:'}</span>
+                  <span className="font-bold">{reviewCount}</span>
+                </div>
+              )}
               <div className="flex justify-between font-medium text-gray-500">
                 <span>{isHi ? 'हल नहीं किए गए:' : 'Unattempted:'}</span>
                 <span className="font-bold">{notAnsweredCount}</span>
@@ -335,6 +584,40 @@ export const ExamEngine = ({ questions, testInfo, onFinishExam, onExit, lang = '
                 className="px-6 py-2 rounded-full bg-[#7F58FA] text-white text-xs font-bold hover:bg-[#6C44E8] shadow-md shadow-[#7F58FA]/20"
               >
                 {isHi ? 'पुष्टि करें और जमा करें' : 'Confirm Submission'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Exit Confirmation Modal */}
+      {showExitModal && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 text-xl font-bold">
+              ⚠️
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">
+              {isHi ? 'क्या आप परीक्षा से बाहर निकलना चाहते हैं?' : 'Exit Examination?'}
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-500 mb-6 leading-relaxed">
+              {isHi
+                ? 'यदि आप अभी बाहर निकलते हैं, तो आपका वर्तमान सत्र समाप्त हो जाएगा। क्या आप वाकई मुख्य सूची में वापस जाना चाहते हैं?'
+                : 'If you exit now, your active exam session will be terminated and unsaved progress will be cleared. Do you want to return to the catalog?'}
+            </p>
+
+            <div className="flex items-center justify-end gap-3">
+              <button
+                onClick={() => setShowExitModal(false)}
+                className="px-5 py-2.5 rounded-full border border-gray-200 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-all"
+              >
+                {isHi ? 'नहीं, परीक्षा जारी रखें' : 'Stay in Exam'}
+              </button>
+              <button
+                onClick={handleExitConfirmed}
+                className="px-6 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all shadow-md shadow-rose-600/20"
+              >
+                {isHi ? 'हाँ, बाहर निकलें' : 'Yes, Exit'}
               </button>
             </div>
           </div>
