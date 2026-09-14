@@ -1,9 +1,8 @@
 import React from 'react';
 import { Logo, SearchIcon } from './Icons';
 import { translations } from '../../data/translations';
-import { ThemeToggle } from './ThemeToggle';
 
-export const Navbar = ({ onNavigate, lang = 'en', onToggleLang, theme = 'light', onToggleTheme }) => {
+export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
   const t = translations[lang] || translations.en;
 
   return (
@@ -49,11 +48,8 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang, theme = 'light',
           </button>
         </nav>
 
-        {/* Right Actions: Theme Toggle, Hindi/English Switcher & Direct Start Test */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Industrial Lever Dark/Light Mode Switch (Uiverse.io by njesenberger) */}
-          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
-
+        {/* Right Actions: Hindi/English Switcher & Direct Start Test */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
           {/* Language Switcher Pill */}
           <button
             onClick={onToggleLang}
@@ -67,7 +63,7 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang, theme = 'light',
           <button 
             onClick={() => onNavigate('catalog')}
             aria-label="Search exams"
-            className="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 hidden md:flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors"
+            className="w-8 h-8 rounded-full hover:bg-gray-100 hidden md:flex items-center justify-center text-gray-600 transition-colors"
           >
             <SearchIcon className="w-4 h-4" />
           </button>

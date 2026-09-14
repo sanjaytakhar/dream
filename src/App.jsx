@@ -34,7 +34,6 @@ export const EXAM_STORAGE_KEY = 'pariksha_active_exam';
 export const RESULTS_STORAGE_KEY = 'pariksha_last_results';
 export const LANG_STORAGE_KEY = 'pariksha_lang';
 export const SCREEN_STORAGE_KEY = 'pariksha_screen';
-export const THEME_STORAGE_KEY = 'pariksha_theme';
 
 export function getTestById(testId) {
   if (!testId) return mockTests[0];
@@ -149,36 +148,6 @@ export function App() {
   const [lang, setLang] = useState(() => {
     return localStorage.getItem(LANG_STORAGE_KEY) || 'hi';
   });
-  const [theme, setTheme] = useState(() => {
-    try {
-      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-      if (savedTheme) return savedTheme;
-      if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-    } catch (e) {}
-    return 'light';
-  });
-
-  // Keep <html> class synchronized with active theme
-  useEffect(() => {
-    try {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      localStorage.setItem(THEME_STORAGE_KEY, theme);
-    } catch (e) {}
-  }, [theme]);
-
-  const toggleTheme = (nextTheme) => {
-    setTheme((prev) => {
-      const target = nextTheme || (prev === 'dark' ? 'light' : 'dark');
-      return target;
-    });
-  };
-
   const [selectedClassFilter, setSelectedClassFilter] = useState('All');
   const [activeTest, setActiveTest] = useState(
     initialState ? initialState.activeTest : mockTests[0]
@@ -304,7 +273,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDFAFF] dark:bg-[#0b0c15] font-sans antialiased text-[#1F2937] dark:text-gray-100 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#FDFAFF] font-sans antialiased text-[#1F2937]">
       {/* Uiverse Loader Modal Overlay */}
       {loadingOverlay && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all">
@@ -333,8 +302,6 @@ export function App() {
           onNavigate={handleNavigate}
           lang={lang}
           onToggleLang={toggleLang}
-          theme={theme}
-          onToggleTheme={toggleTheme}
         />
       )}
 
@@ -366,8 +333,6 @@ export function App() {
             onExit={handleExitExam}
             lang={lang}
             restoredSession={restoredSession}
-            theme={theme}
-            onToggleTheme={toggleTheme}
           />
         )}
 
