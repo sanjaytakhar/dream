@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ClockIcon, PauseIcon, PlayIcon } from '../common/Icons';
 import { defaultQuestions } from '../../data/mockData';
 import { translations } from '../../data/translations';
+import { ThemeToggle } from '../common/ThemeToggle';
 const STORAGE_KEY = 'pariksha_active_exam';
 
 const getInitialSession = (testId) => {
@@ -25,7 +26,9 @@ export const ExamEngine = ({
   onFinishExam,
   onExit,
   lang = 'en',
-  restoredSession = null
+  restoredSession = null,
+  theme = 'light',
+  onToggleTheme
 }) => {
   const activeQuestions = questions && questions.length > 0 ? questions : defaultQuestions;
   const initialTime = testInfo?.durationMins
@@ -290,7 +293,16 @@ export const ExamEngine = ({
         </div>
 
         {/* Timer, Exit & Submit Controls */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {onToggleTheme && (
+            <ThemeToggle
+              theme={theme}
+              onToggleTheme={onToggleTheme}
+              showLabels={false}
+              className="hidden sm:inline-flex"
+            />
+          )}
+
           <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-full shadow-inner">
             <ClockIcon className="w-4 h-4 text-[#7F58FA]" />
             <span className="font-mono text-sm sm:text-base font-bold text-gray-800 tracking-wider">
