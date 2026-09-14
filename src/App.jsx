@@ -6,6 +6,7 @@ import { LandingPage } from './components/screens/LandingPage';
 import { MockTestsCatalog } from './components/screens/MockTestsCatalog';
 import { ExamEngine } from './components/screens/ExamEngine';
 import { TestResults } from './components/screens/TestResults';
+import { SimulationHub } from './components/screens/SimulationHub';
 
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
@@ -32,6 +33,7 @@ import {
 export const EXAM_STORAGE_KEY = 'pariksha_active_exam';
 export const RESULTS_STORAGE_KEY = 'pariksha_last_results';
 export const LANG_STORAGE_KEY = 'pariksha_lang';
+export const SCREEN_STORAGE_KEY = 'pariksha_screen';
 
 export function getTestById(testId) {
   if (!testId) return mockTests[0];
@@ -121,6 +123,18 @@ export function App() {
             examSummary: parsed.examSummary
           };
         }
+      }
+
+      // Check saved screen (e.g. simulations)
+      const savedScreen = localStorage.getItem(SCREEN_STORAGE_KEY);
+      if (savedScreen === 'simulations') {
+        return {
+          screen: 'simulations',
+          activeTest: mockTests[0],
+          activeQuestions: class6MathsTest1Questions,
+          restoredSession: null,
+          examSummary: null
+        };
       }
     } catch (e) {
       console.error('Error recovering state from localStorage:', e);
@@ -249,6 +263,11 @@ export function App() {
         localStorage.removeItem(RESULTS_STORAGE_KEY);
       } catch (e) {}
     }
+    try {
+      if (screen !== 'cbt') {
+        localStorage.setItem(SCREEN_STORAGE_KEY, screen);
+      }
+    } catch (e) {}
     setCurrentScreen(screen);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -324,6 +343,13 @@ export function App() {
             testInfo={activeTest}
             onNavigate={handleNavigate}
             lang={lang}
+          />
+        )}
+
+        {currentScreen === 'simulations' && (
+          <SimulationHub
+            lang={lang}
+            onNavigate={handleNavigate}
           />
         )}
       </div>

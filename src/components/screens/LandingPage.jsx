@@ -89,17 +89,29 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
             </form>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={() => onNavigate('catalog')}
-                className="px-7 py-3.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/30 hover:shadow-[#7F58FA]/40 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-sm font-bold shadow-lg shadow-[#7F58FA]/30 hover:shadow-[#7F58FA]/40 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
               >
                 <span>📝</span>
                 <span>{lang === 'hi' ? 'मॉक टेस्ट शुरू करें' : 'Start Mock Tests'}</span>
               </button>
+
+              <button
+                onClick={() => onNavigate('simulations')}
+                className="px-6 py-3.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-sm font-bold shadow-lg shadow-sky-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
+              >
+                <span>🌌</span>
+                <span>{lang === 'hi' ? '3D सिमुलेशन लैब' : '3D Simulation Lab'}</span>
+                <span className="text-[10px] bg-white/25 px-1.5 py-0.5 rounded-full uppercase font-black tracking-wider">
+                  New
+                </span>
+              </button>
+
               <button
                 onClick={() => onStartTest('c8-sci-t1-crops')}
-                className="px-7 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="px-5 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 {lang === 'hi' ? 'कक्षा 8 विज्ञान टेस्ट' : 'Class 8 Science Test'}
               </button>
@@ -195,6 +207,64 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
               </span>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 3D Simulation Lab Showcase Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="bg-gradient-to-r from-[#0b0f19] via-[#111827] to-[#1e1b4b] rounded-3xl p-6 sm:p-8 border border-gray-800 shadow-2xl text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10 pb-6 border-b border-gray-800">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold border border-sky-500/40 mb-2">
+                <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span>{lang === 'hi' ? '✨ नया: इंटरएक्टिव 3D सिमुलेशन लैब' : '✨ New: Interactive 3D Simulation Lab'}</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                {lang === 'hi' ? 'विज्ञान और गणित को जीवंत रूप में समझें' : 'See Science & Math Come to Life'}
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-xl">
+                {lang === 'hi' 
+                  ? 'प्रक्षेप्य गति, मानव हृदय की संरचना, विद्युत परिपथ एवं रासायनिक अभिक्रियाओं को रीयल-टाइम में चलाएं।'
+                  : 'Experiment with projectile motion, cardiac anatomy, DC circuits, and acid-base neutralization in real time.'}
+              </p>
+            </div>
+
+            <button
+              onClick={() => onNavigate('simulations')}
+              className="px-6 py-3 rounded-full bg-sky-500 hover:bg-sky-400 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-sky-500/25 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shrink-0"
+            >
+              <span>{lang === 'hi' ? 'सभी सिमुलेशन देखें' : 'Explore All Simulations'}</span>
+              <span>→</span>
+            </button>
+          </div>
+
+          {/* Quick Simulation Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 relative z-10">
+            {[
+              { id: 'projectile-motion', title: 'प्रक्षेप्य गति', titleEn: 'Projectile Motion', icon: '🚀', sub: 'Physics • Class 9–11', color: 'border-sky-500/40 hover:border-sky-400' },
+              { id: 'human-heart', title: 'मानव हृदय रचना', titleEn: 'Human Heart 3D', icon: '🫀', sub: 'Biology • Class 8–10', color: 'border-rose-500/40 hover:border-rose-400' },
+              { id: 'ohms-law', title: 'ओम का नियम', titleEn: "Ohm's Law Circuit", icon: '⚡', sub: 'Physics • Class 10–12', color: 'border-amber-500/40 hover:border-amber-400' },
+              { id: 'ph-scale', title: 'अम्ल-क्षार pH', titleEn: 'pH Scale & Acids', icon: '🧪', sub: 'Chemistry • Class 7–10', color: 'border-emerald-500/40 hover:border-emerald-400' }
+            ].map((sim) => (
+              <div
+                key={sim.id}
+                onClick={() => onNavigate('simulations')}
+                className={`bg-[#111827]/90 p-4 rounded-2xl border ${sim.color} cursor-pointer transition-all hover:-translate-y-1 hover:shadow-xl group`}
+              >
+                <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">{sim.icon}</div>
+                <h4 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">
+                  {lang === 'hi' ? sim.title : sim.titleEn}
+                </h4>
+                <p className="text-[11px] text-gray-400 mt-0.5">{sim.sub}</p>
+                <div className="mt-3 text-[10px] text-sky-400 font-bold flex items-center gap-1">
+                  <span>{lang === 'hi' ? 'शुरू करें' : 'Start Sim'}</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

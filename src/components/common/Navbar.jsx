@@ -22,11 +22,11 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           </div>
         </div>
 
-        {/* Center Links: Home & Mock Tests Only */}
-        <nav className="hidden sm:flex items-center gap-7 text-sm font-medium text-gray-600">
+        {/* Center Links: Home, Mock Tests & Simulation Lab */}
+        <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-600">
           <button 
             onClick={() => onNavigate('landing')}
-            className="text-[#7F58FA] font-bold transition-colors hover:text-[#6C44E8]"
+            className="text-gray-600 hover:text-[#7F58FA] transition-colors font-semibold"
           >
             {t.navHome}
           </button>
@@ -35,6 +35,16 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
             className="text-gray-600 hover:text-[#7F58FA] transition-colors font-semibold"
           >
             {lang === 'hi' ? 'मॉक टेस्ट (कक्षा 6–12)' : 'Mock Tests (Class 6–12)'}
+          </button>
+          <button 
+            onClick={() => onNavigate('simulations')}
+            className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-sky-50 to-indigo-50 border border-sky-200 text-sky-700 font-extrabold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all flex items-center gap-1.5 shadow-sm group"
+          >
+            <span className="group-hover:rotate-12 transition-transform">🌌</span>
+            <span>{lang === 'hi' ? 'सिमुलेशन लैब' : 'Simulations'}</span>
+            <span className="text-[9px] bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-1.5 py-0.5 rounded-full font-black tracking-wider uppercase group-hover:bg-white group-hover:text-sky-600">
+              3D Lab
+            </span>
           </button>
         </nav>
 
