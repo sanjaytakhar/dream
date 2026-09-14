@@ -1,8 +1,9 @@
 import React from 'react';
 import { Logo, SearchIcon } from './Icons';
 import { translations } from '../../data/translations';
+import { ThemeToggle } from './ThemeToggle';
 
-export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
+export const Navbar = ({ onNavigate, lang = 'en', onToggleLang, theme = 'light', onToggleTheme }) => {
   const t = translations[lang] || translations.en;
 
   return (
@@ -48,8 +49,11 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           </button>
         </nav>
 
-        {/* Right Actions: Hindi/English Switcher & Direct Start Test */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        {/* Right Actions: Theme Toggle, Hindi/English Switcher & Direct Start Test */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Industrial Lever Dark/Light Mode Switch (Uiverse.io by njesenberger) */}
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
+
           {/* Language Switcher Pill */}
           <button
             onClick={onToggleLang}
@@ -63,17 +67,18 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           <button 
             onClick={() => onNavigate('catalog')}
             aria-label="Search exams"
-            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-600 transition-colors"
+            className="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 hidden md:flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors"
           >
             <SearchIcon className="w-4 h-4" />
           </button>
 
           <button 
             onClick={() => onNavigate('catalog')}
-            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0 flex items-center gap-1.5"
+            className="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#7F58FA]/25 transition-all hover:scale-105 active:scale-95 shrink-0 flex items-center gap-1 sm:gap-1.5"
           >
             <span>📝</span>
-            <span>{lang === 'hi' ? 'मॉक टेस्ट शुरू करें' : 'Start Mock Test'}</span>
+            <span className="hidden sm:inline">{lang === 'hi' ? 'मॉक टेस्ट शुरू करें' : 'Start Mock Test'}</span>
+            <span className="sm:hidden text-xs">{lang === 'hi' ? 'टेस्ट' : 'Test'}</span>
           </button>
         </div>
       </div>
