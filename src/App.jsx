@@ -137,11 +137,11 @@ export function App() {
         }
       }
 
-      // Check saved screen (e.g. simulations)
+      // Check saved screen (e.g. simulations or catalog)
       const savedScreen = localStorage.getItem(SCREEN_STORAGE_KEY);
-      if (savedScreen === 'simulations') {
+      if (savedScreen === 'simulations' || savedScreen === 'catalog') {
         return {
-          screen: 'simulations',
+          screen: savedScreen,
           activeTest: mockTests[0],
           activeQuestions: class6MathsTest1Questions,
           restoredSession: null,
