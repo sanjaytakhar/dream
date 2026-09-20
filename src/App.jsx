@@ -21,7 +21,11 @@ import {
   class8CoalQuestions,
   class8ConservationQuestions,
   class8CombinedResourcesQuestions,
-  class8GrandMasterQuestions
+  class8GrandMasterQuestions,
+  class8CropTest2Questions,
+  class8CoalTest2Questions,
+  class8ConservationTest2Questions,
+  class8GrandMaster2Questions
 } from './data/class8ScienceQuestions';
 import {
   class6MathsTest1Questions,
@@ -71,6 +75,14 @@ export function getQuestionsForTest(testOrId) {
     return class8CombinedResourcesQuestions;
   } else if (testId === 'c8-sci-t5-grand') {
     return class8GrandMasterQuestions;
+  } else if (testId === 'c8-sci-t6-crops-set2') {
+    return class8CropTest2Questions;
+  } else if (testId === 'c8-sci-t7-coal-set2') {
+    return class8CoalTest2Questions;
+  } else if (testId === 'c8-sci-t8-conservation-set2') {
+    return class8ConservationTest2Questions;
+  } else if (testId === 'c8-sci-t9-mastery') {
+    return class8GrandMaster2Questions;
   // Class 11 CS
   } else if (
     testId === 'c11-cs-python' ||
