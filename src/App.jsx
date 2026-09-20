@@ -148,6 +148,34 @@ export function App() {
           examSummary: null
         };
       }
+
+      // Check URL search parameters for direct deep-linking
+      if (typeof window !== 'undefined' && window.location?.search) {
+        const params = new URLSearchParams(window.location.search);
+        const urlTest = params.get('test');
+        if (urlTest) {
+          const test = getTestById(urlTest);
+          if (test) {
+            return {
+              screen: 'cbt',
+              activeTest: test,
+              activeQuestions: getQuestionsForTest(test),
+              restoredSession: null,
+              examSummary: null
+            };
+          }
+        }
+        const urlScreen = params.get('screen');
+        if (urlScreen === 'catalog' || urlScreen === 'simulations') {
+          return {
+            screen: urlScreen,
+            activeTest: mockTests[0],
+            activeQuestions: class6MathsTest1Questions,
+            restoredSession: null,
+            examSummary: null
+          };
+        }
+      }
     } catch (e) {
       console.error('Error recovering state from localStorage:', e);
     }
@@ -160,7 +188,14 @@ export function App() {
   const [lang, setLang] = useState(() => {
     return localStorage.getItem(LANG_STORAGE_KEY) || 'hi';
   });
-  const [selectedClassFilter, setSelectedClassFilter] = useState('All');
+  const [selectedClassFilter, setSelectedClassFilter] = useState(() => {
+    if (typeof window !== 'undefined' && window.location?.search) {
+      const params = new URLSearchParams(window.location.search);
+      const urlClass = params.get('class');
+      if (urlClass) return urlClass;
+    }
+    return 'All';
+  });
   const [activeTest, setActiveTest] = useState(
     initialState ? initialState.activeTest : mockTests[0]
   );
