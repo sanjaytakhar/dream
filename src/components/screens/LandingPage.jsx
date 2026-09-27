@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SearchIcon, ChevronRight } from '../common/Icons';
 import { schoolClasses } from '../../data/mockData';
 import { translations } from '../../data/translations';
+import { OldPapers } from './OldPapers';
 
 export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang = 'en' }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,9 +32,20 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#F3EFFF] text-[#7F58FA] text-xs font-bold border border-purple-100 shadow-sm">
-              <img src="./rajasthan-education-logo.png" alt="Emblem" className="w-4 h-4 object-contain" />
-              <span>{t.schoolName} &bull; {t.classesRange}</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#F3EFFF] text-[#7F58FA] text-xs font-bold border border-purple-100 shadow-sm">
+                <img src="./rajasthan-education-logo.png" alt="Emblem" className="w-4 h-4 object-contain" />
+                <span>{t.schoolName} &bull; {t.classesRange}</span>
+              </div>
+              <a
+                href="https://rajeduboard.rajasthan.gov.in/books/index.htm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200 hover:bg-emerald-100 transition-all shadow-sm"
+              >
+                <span>📜</span>
+                <span>{lang === 'hi' ? 'RBSE पुराने पेपर व बुक्स ↗' : 'RBSE Old Papers & Books ↗'}</span>
+              </a>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-[1.15]">
@@ -99,21 +111,32 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
               </button>
 
               <button
+                onClick={() => {
+                  const elem = document.getElementById('old-papers');
+                  if (elem) {
+                    elem.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    onNavigate('old-papers');
+                  }
+                }}
+                className="px-5 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
+              >
+                <span>📜</span>
+                <span>{lang === 'hi' ? 'पुराने बोर्ड पेपर (RBSE)' : 'Old Board Papers (RBSE)'}</span>
+                <span className="text-[10px] bg-purple-100 text-[#7F58FA] px-1.5 py-0.5 rounded-full font-extrabold uppercase">
+                  Govt
+                </span>
+              </button>
+
+              <button
                 onClick={() => onNavigate('simulations')}
-                className="px-6 py-3.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-sm font-bold shadow-lg shadow-sky-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
+                className="px-5 py-3.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-sm font-bold shadow-lg shadow-sky-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2"
               >
                 <span>🌌</span>
                 <span>{lang === 'hi' ? '3D सिमुलेशन लैब' : '3D Simulation Lab'}</span>
                 <span className="text-[10px] bg-white/25 px-1.5 py-0.5 rounded-full uppercase font-black tracking-wider">
                   New
                 </span>
-              </button>
-
-              <button
-                onClick={() => onStartTest('c8-sci-t1-crops')}
-                className="px-5 py-3.5 rounded-full bg-white hover:bg-purple-50 text-[#7F58FA] border border-[#7F58FA]/40 text-sm font-bold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                {lang === 'hi' ? 'कक्षा 8 विज्ञान टेस्ट' : 'Class 8 Science Test'}
               </button>
             </div>
           </div>
@@ -208,6 +231,16 @@ export const LandingPage = ({ onNavigate, onStartTest, onSelectClassFilter, lang
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Section: Old Papers & RBSE Books Repository */}
+      <section className="border-t border-gray-100 bg-[#FAF7FD]">
+        <OldPapers
+          onNavigate={onNavigate}
+          onStartTest={onStartTest}
+          lang={lang}
+          isEmbedded={true}
+        />
       </section>
 
       {/* 3D Simulation Lab Showcase Banner */}

@@ -112,7 +112,21 @@ export const translations = {
     studentProfileTitle: "Student Profile & Academic Card",
     verifiedStudent: "Verified Student",
     rollNo: "Roll No.",
-    admissionNo: "Admission ID"
+    admissionNo: "Admission ID",
+
+    // Old Papers Section
+    navOldPapers: "Old Papers",
+    oldPapersTitle: "RBSE Old Question Papers & Textbooks",
+    oldPapersSubtitle: "Official Board of Secondary Education Rajasthan (BSER / RBSE) question papers, model papers, and digital textbooks.",
+    oldPapersOfficialBadge: "Official Rajasthan Board Portal",
+    oldPapersOfficialDesc: "Access the official repository hosted by Board of Secondary Education Rajasthan, Ajmer for downloading previous years board question papers, blueprints, and curriculum textbooks.",
+    visitOfficialPortal: "Visit Official RBSE Books & Old Papers Portal",
+    copyPortalLink: "Copy Link",
+    linkCopied: "Official link copied to clipboard!",
+    practiceOnlineCBT: "Practice Online CBT Mock",
+    downloadOfficialPDF: "Download Paper from RBSE",
+    boardClasses: "Board Classes (Class 10 & 12)",
+    allStreams: "All Streams (Science, Arts, Commerce)"
   },
 
   hi: {
@@ -228,6 +242,20 @@ export const translations = {
     studentProfileTitle: "विद्यार्थी विवरण एवं प्रगति पत्रक",
     verifiedStudent: "प्रमाणित विद्यार्थी",
     rollNo: "रोल नंबर",
-    admissionNo: "प्रवेश क्रमांक (Admission No.)"
+    admissionNo: "प्रवेश क्रमांक (Admission No.)",
+
+    // Old Papers Section
+    navOldPapers: "पुराने पेपर",
+    oldPapersTitle: "विगत वर्ष बोर्ड प्रश्न पत्र एवं पाठ्यपुस्तकें",
+    oldPapersSubtitle: "राजस्थान माध्यमिक शिक्षा बोर्ड (RBSE) अजमेर द्वारा जारी मूल बोर्ड प्रश्न पत्र, मॉडल पेपर्स एवं डिजिटल बुक्स।",
+    oldPapersOfficialBadge: "माध्यमिक शिक्षा बोर्ड राजस्थान • आधिकारिक पोर्टल",
+    oldPapersOfficialDesc: "राजस्थान माध्यमिक शिक्षा बोर्ड, अजमेर की आधिकारिक वेबसाइट पर सभी वर्षों के बोर्ड प्रश्न पत्र, अंक विभाजन (ब्लूप्रिंट) एवं कक्षावार पाठ्यपुस्तकें उपलब्ध हैं।",
+    visitOfficialPortal: "RBSE आधिकारिक बुक्स व पुराने पेपर पोर्टल खोलें",
+    copyPortalLink: "लिंक कॉपी करें",
+    linkCopied: "आधिकारिक लिंक कॉपी हो गया!",
+    practiceOnlineCBT: "ऑनलाइन CBT परीक्षा दें",
+    downloadOfficialPDF: "RBSE से पेपर डाउनलोड करें",
+    boardClasses: "बोर्ड कक्षाएं (कक्षा 10 व 12)",
+    allStreams: "सभी संकाय (विज्ञान, कला, वाणिज्य)"
   }
 };

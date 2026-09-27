@@ -37,6 +37,16 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
             {lang === 'hi' ? 'मॉक टेस्ट (कक्षा 6–12)' : 'Mock Tests (Class 6–12)'}
           </button>
           <button 
+            onClick={() => onNavigate('old-papers')}
+            className="text-gray-600 hover:text-[#7F58FA] transition-colors font-semibold flex items-center gap-1"
+          >
+            <span>📜</span>
+            <span>{lang === 'hi' ? 'पुराने पेपर' : 'Old Papers'}</span>
+            <span className="text-[10px] bg-purple-100 text-[#7F58FA] px-1.5 py-0.5 rounded-full font-bold">
+              RBSE
+            </span>
+          </button>
+          <button 
             onClick={() => onNavigate('simulations')}
             className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-sky-50 to-indigo-50 border border-sky-200 text-sky-700 font-extrabold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all flex items-center gap-1.5 shadow-sm group"
           >
@@ -58,6 +68,15 @@ export const Navbar = ({ onNavigate, lang = 'en', onToggleLang }) => {
           >
             <span>🌐</span>
             <span>{lang === 'en' ? 'हिन्दी' : 'English'}</span>
+          </button>
+
+          {/* Mobile Old Papers Pill */}
+          <button
+            onClick={() => onNavigate('old-papers')}
+            className="sm:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-purple-200 bg-purple-50 text-[#7F58FA] text-xs font-bold hover:bg-[#7F58FA] hover:text-white transition-all shadow-sm"
+          >
+            <span>📜</span>
+            <span>{lang === 'hi' ? 'पेपर' : 'Papers'}</span>
           </button>
 
           <button 

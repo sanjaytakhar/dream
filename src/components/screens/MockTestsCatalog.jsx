@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { SearchIcon } from '../common/Icons';
+import { SearchIcon, ExternalLinkIcon } from '../common/Icons';
 import { mockTests } from '../../data/mockData';
 import { translations } from '../../data/translations';
+import { OFFICIAL_RBSE_URL } from '../../data/oldPapersData';
+import { OldPapers } from './OldPapers';
 
 export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter = 'All', lang = 'en' }) => {
   const [selectedClass, setSelectedClass] = useState(selectedClassFilter);
@@ -25,6 +27,7 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
     { id: 'secondary', en: 'Class 9-10 (Secondary)', hi: 'कक्षा 9-10 (माध्यमिक)' },
     { id: 'senior', en: 'Class 11-12 (Senior)', hi: 'कक्षा 11-12 (उच्च माध्यमिक)' },
     { id: 'board', en: 'Board Mocks', hi: 'बोर्ड परीक्षा मॉक' },
+    { id: 'old-papers', en: 'Old Papers (RBSE)', hi: 'विगत वर्ष बोर्ड पेपर' },
   ];
 
   const filteredTests = mockTests.filter(test => {
@@ -37,6 +40,8 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
       if (!['Class 11', 'Class 12'].includes(test.schoolClass)) return false;
     } else if (selectedTab === 'Board Mocks' || selectedTab === 'बोर्ड परीक्षा मॉक') {
       if (!['Class 10', 'Class 12'].includes(test.schoolClass)) return false;
+    } else if (selectedTab === 'Old Papers (RBSE)' || selectedTab === 'विगत वर्ष बोर्ड पेपर') {
+      if (test.testType !== 'Board Exam Paper' && test.testType !== 'Grand Master Mock') return false;
     }
 
     if (selectedClass !== 'All' && test.schoolClass !== selectedClass) return false;
@@ -151,6 +156,51 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
             </div>
           </div>
 
+          {/* RBSE Official Old Papers Repository Banner */}
+          <div className="bg-gradient-to-r from-[#1E1B4B] via-[#2E1065] to-[#3B0764] rounded-2xl p-4 sm:p-5 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-purple-500/30 shadow-md">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/15 p-1.5">
+                <img src="./rajasthan-education-logo.png" alt="RBSE" className="w-full h-full object-contain" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-purple-500/40 text-purple-200 px-2.5 py-0.5 rounded-full border border-purple-400/30">
+                    Official Govt. Source
+                  </span>
+                  <span className="text-xs text-purple-300 font-semibold hidden sm:inline">
+                    BSER Ajmer (2018–2025)
+                  </span>
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-white mt-1">
+                  {isHi ? 'राजस्थान बोर्ड (RBSE) विगत वर्ष प्रश्न पत्र एवं पाठ्यपुस्तकें' : 'RBSE Board Official Old Papers & Textbooks Portal'}
+                </h3>
+                <p className="text-xs text-purple-200 mt-0.5">
+                  {isHi ? 'माध्यमिक शिक्षा बोर्ड अजमेर की आधिकारिक वेबसाइट पर सभी विषयों के मूल प्रश्न पत्र व ई-बुक्स उपलब्ध हैं:' : 'Access official previous question papers, model papers, and curriculum textbooks:'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5 self-start md:self-auto shrink-0">
+              <button
+                onClick={() => onNavigate('old-papers')}
+                className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
+              >
+                <span>📜</span>
+                <span>{isHi ? 'पुराने पेपर अनुभाग' : 'Old Papers Section'}</span>
+              </button>
+              <a
+                href={OFFICIAL_RBSE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-full bg-[#7F58FA] hover:bg-[#6C44E8] text-white text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
+                title={OFFICIAL_RBSE_URL}
+              >
+                <span>🌐 {isHi ? 'RBSE पोर्टल खोलें' : 'Open RBSE Portal'}</span>
+                <ExternalLinkIcon className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
           {/* Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
             {tabs.map((tab) => {
@@ -170,6 +220,18 @@ export const MockTestsCatalog = ({ onNavigate, onStartTest, selectedClassFilter 
               );
             })}
           </div>
+
+          {/* If Old Papers tab is selected, render full RBSE repository */}
+          {(selectedTab === 'Old Papers (RBSE)' || selectedTab === 'विगत वर्ष बोर्ड पेपर') && (
+            <div className="bg-white rounded-3xl p-2 sm:p-6 border border-purple-100 shadow-sm mb-6">
+              <OldPapers
+                onNavigate={onNavigate}
+                onStartTest={onStartTest}
+                lang={lang}
+                isEmbedded={true}
+              />
+            </div>
+          )}
 
           {/* Test Cards List */}
           <div className="space-y-4">

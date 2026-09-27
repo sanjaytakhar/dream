@@ -7,6 +7,7 @@ import { MockTestsCatalog } from './components/screens/MockTestsCatalog';
 import { ExamEngine } from './components/screens/ExamEngine';
 import { TestResults } from './components/screens/TestResults';
 import { SimulationHub } from './components/screens/SimulationHub';
+import { OldPapers } from './components/screens/OldPapers';
 
 import { mockTests, defaultQuestions } from './data/mockData';
 import { class11CsQuestions } from './data/class11CsQuestions';
@@ -137,9 +138,9 @@ export function App() {
         }
       }
 
-      // Check saved screen (e.g. simulations or catalog)
+      // Check saved screen (e.g. simulations, catalog, old-papers)
       const savedScreen = localStorage.getItem(SCREEN_STORAGE_KEY);
-      if (savedScreen === 'simulations' || savedScreen === 'catalog') {
+      if (savedScreen === 'simulations' || savedScreen === 'catalog' || savedScreen === 'old-papers') {
         return {
           screen: savedScreen,
           activeTest: mockTests[0],
@@ -166,9 +167,9 @@ export function App() {
           }
         }
         const urlScreen = params.get('screen');
-        if (urlScreen === 'catalog' || urlScreen === 'simulations') {
+        if (urlScreen === 'catalog' || urlScreen === 'simulations' || urlScreen === 'old-papers' || urlScreen === 'oldpapers' || urlScreen === 'papers') {
           return {
-            screen: urlScreen,
+            screen: urlScreen === 'oldpapers' || urlScreen === 'papers' ? 'old-papers' : urlScreen,
             activeTest: mockTests[0],
             activeQuestions: class6MathsTest1Questions,
             restoredSession: null,
@@ -397,6 +398,14 @@ export function App() {
           <SimulationHub
             lang={lang}
             onNavigate={handleNavigate}
+          />
+        )}
+
+        {currentScreen === 'old-papers' && (
+          <OldPapers
+            lang={lang}
+            onNavigate={handleNavigate}
+            onStartTest={handleStartExam}
           />
         )}
       </div>
